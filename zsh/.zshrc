@@ -29,7 +29,10 @@ plugins=(
 	zsh-syntax-highlighting
 )
 
+# source $ZSH/oh-my-zsh.sh
 source $ZSH/oh-my-zsh.sh
+
+setopt globdots
 
 # User configuration
 export EDITOR='vim'
@@ -41,6 +44,7 @@ alias 'll'='ls -lh'
 export TERM=xterm-256color
 export FZF_DEFAULT_OPTS='--preview "'"bat --style=numbers --color=always --line-range :500 {}"'"'
 export FZF_CTRL_T_COMMAD='fd $FD_OPTIONS'
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
