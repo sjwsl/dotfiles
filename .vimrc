@@ -18,6 +18,13 @@ Plug 'ryanoasis/vim-devicons'
 " Plug 'codota/tabnine-vim'
 call plug#end()
 
+
+" change cursor shape in diffrent modes
+let &t_SI = "\<esc>[6 q"
+let &t_SR = "\<esc>[6 q"
+let &t_EI = "\<esc>[2 q"
+
+
 " common
 set nocompatible
 set number
@@ -27,6 +34,7 @@ set wildmenu
 set showmatch
 filetype on
 filetype plugin on
+set timeoutlen=5
 set pumheight=10
 set laststatus=2
 set clipboard^=unnamed,unnamedplus
