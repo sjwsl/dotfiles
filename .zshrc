@@ -7,7 +7,7 @@ fi
 
 export DOTFILES='/Users/xutianshu/.dotfiles'
 
-source $DOTFILES/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme 
+source $DOTFILES/zsh/themes/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -24,6 +24,10 @@ export EDITOR='vim'
 export TERM=xterm-256color
 
 export PATH="/Users/xutianshu/anaconda3/bin/:$PATH"
+
+# zsh-z
+autoload -U compinit && compinit
+zstyle ':completion:*' menu select
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
