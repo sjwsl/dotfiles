@@ -33,6 +33,7 @@ set relativenumber
 set cursorline
 set wildmenu
 set showmatch
+set splitright
 filetype on
 filetype plugin on
 set timeoutlen=1000
