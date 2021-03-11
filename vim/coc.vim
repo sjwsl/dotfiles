@@ -60,7 +60,7 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
-nmap <silent> gs :vsp<CR><Plug>(coc-definition)
+nmap <silent> ,gd :vsp<CR><Plug>(coc-definition)
 nmap <silent> gd <Plug>(coc-definition) 
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
