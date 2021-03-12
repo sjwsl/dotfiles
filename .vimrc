@@ -11,11 +11,12 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'majutsushi/tagbar'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" Plug 'junegunn/fzf.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'tpope/vim-fugitive'
+Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 " Plug 'jackguo380/vim-lsp-cxx-highlight'
 " Plug 'luochen1990/rainbow'
 " Plug 'codota/tabnine-vim'
@@ -27,12 +28,16 @@ let &t_SI = "\<esc>[6 q"
 let &t_SR = "\<esc>[6 q"
 let &t_EI = "\<esc>[2 q"
 
+" for navigate in completion box
+cnoremap <up> <C-P>
+cnoremap <down> <C-N>
+
 " common
 set nocompatible
 set number
 set relativenumber
 set cursorline
-set wildmenu
+" set wildmenu
 set showmatch
 set splitright
 filetype on
