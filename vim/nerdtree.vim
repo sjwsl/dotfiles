@@ -1,4 +1,3 @@
-nnoremap <silent> <leader>nt :NERDTreeToggle<CR>
 
 " Start NERDTree when Vim starts with a directory argument.
 autocmd StdinReadPre * let s:std_in=1

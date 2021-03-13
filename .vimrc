@@ -22,34 +22,32 @@ Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 " Plug 'codota/tabnine-vim'
 call plug#end()
 
+let mapleader=" "
+noremap , <C-W>
+inoremap jk <ESC>
+
+" for navigate in completion box
+cnoremap <up> <C-P>
+cnoremap <down> <C-N>
 
 " change cursor shape in diffrent modes
 let &t_SI = "\<esc>[6 q"
 let &t_SR = "\<esc>[6 q"
 let &t_EI = "\<esc>[2 q"
 
-" for navigate in completion box
-cnoremap <up> <C-P>
-cnoremap <down> <C-N>
-
 " common
-set nocompatible
 set number
 set relativenumber
 set cursorline
-" set wildmenu
+set wildmenu
 set showmatch
 set splitright
-filetype on
-filetype plugin on
+filetype plugin indent on
 set timeoutlen=1000
 set ttimeoutlen=5
 set pumheight=10
 set laststatus=2
 set clipboard^=unnamed,unnamedplus
-let mapleader=" "
-noremap , <C-W>
-inoremap jk <esc>
 
 " theme
 set background=dark
