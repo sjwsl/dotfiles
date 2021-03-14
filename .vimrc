@@ -22,6 +22,15 @@ Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 " Plug 'codota/tabnine-vim'
 call plug#end()
 
+" theme
+set background=dark
+colorscheme palenight
+let g:airline_theme = "palenight"
+let g:palenight_terminal_italics=1
+if (has("nvim"))
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+
 let mapleader=" "
 noremap , <C-W>
 inoremap jk <ESC>
@@ -42,21 +51,12 @@ set cursorline
 set wildmenu
 set showmatch
 set splitright
-filetype plugin indent on
 set timeoutlen=1000
 set ttimeoutlen=5
 set pumheight=10
 set laststatus=2
 set clipboard^=unnamed,unnamedplus
-
-" theme
-set background=dark
-colorscheme palenight
-let g:airline_theme = "palenight"
-let g:palenight_terminal_italics=1
-if (has("nvim"))
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
+filetype plugin indent on
 
 " indent
 set autoindent
