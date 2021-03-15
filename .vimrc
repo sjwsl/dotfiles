@@ -14,7 +14,7 @@ Plug 'majutsushi/tagbar'
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " Plug 'junegunn/fzf.vim'
 Plug 'ryanoasis/vim-devicons'
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 Plug 'tpope/vim-fugitive'
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 " Plug 'jackguo380/vim-lsp-cxx-highlight'
@@ -51,6 +51,7 @@ set cursorline
 set wildmenu
 set showmatch
 set splitright
+set lazyredraw
 set timeoutlen=1000
 set ttimeoutlen=5
 set pumheight=10
@@ -73,8 +74,6 @@ set hlsearch
 nnoremap <leader>h :nohlsearch<CR>
 
 " movement
-noremap j gj
-noremap k gk
 noremap B ^
 noremap E $
 noremap $ <nop>
