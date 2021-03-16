@@ -21,4 +21,3 @@ endfunction
 " leader
 nnoremap <leader>t :TagbarToggle<CR>
 nnoremap <leader>d :NERDTreeToggle<CR>
-nnoremap <leader> 

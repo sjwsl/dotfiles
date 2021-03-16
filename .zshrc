@@ -29,6 +29,13 @@ export PATH="/Users/xutianshu/anaconda3/bin/:$PATH"
 autoload -U compinit && compinit
 zstyle ':completion:*' menu select
 
+# make search up and down work, so partially type and hit up/down to find relevant stuff
+bindkey '^[[A' up-line-or-search                                                
+bindkey '^[[B' down-line-or-search
+
+# smart-case completion
+zstyle ':completion:*'  matcher-list 'm:{a-z}={A-Z}'
+
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
