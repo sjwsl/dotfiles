@@ -17,9 +17,6 @@ Plug 'ryanoasis/vim-devicons'
 " Plug 'ludovicchabant/vim-gutentags'
 Plug 'tpope/vim-fugitive'
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
-" Plug 'jackguo380/vim-lsp-cxx-highlight'
-" Plug 'luochen1990/rainbow'
-" Plug 'codota/tabnine-vim'
 call plug#end()
 
 " theme

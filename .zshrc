@@ -16,9 +16,6 @@ source $DOTFILES/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $DOTFILES/zsh/plugins/zsh-z/zsh-z.plugin.zsh
 source $DOTFILES/zsh/alias.zsh
 
-# make zsh completion show hidden files
-setopt globdots
-
 # User configuration
 export EDITOR='vim'
 export TERM=xterm-256color
@@ -28,6 +25,7 @@ export PATH="/Users/xutianshu/anaconda3/bin/:$PATH"
 # zsh-z
 autoload -U compinit && compinit
 zstyle ':completion:*' menu select
+export ZSHZ_CASE=smart
 
 # make search up and down work, so partially type and hit up/down to find relevant stuff
 bindkey '^[[A' up-line-or-search                                                
@@ -54,3 +52,4 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles
