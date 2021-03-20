@@ -14,7 +14,7 @@ Plug 'majutsushi/tagbar'
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " Plug 'junegunn/fzf.vim'
 Plug 'ryanoasis/vim-devicons'
-" Plug 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'tpope/vim-fugitive'
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 Plug 'jackguo380/vim-lsp-cxx-highlight'
@@ -43,6 +43,8 @@ let &t_SR = "\<esc>[6 q"
 let &t_EI = "\<esc>[2 q"
 
 " common
+set mouse=a
+set noerrorbells
 set number
 set relativenumber
 set cursorline
@@ -54,6 +56,7 @@ set timeoutlen=1000
 set ttimeoutlen=5
 set pumheight=10
 set laststatus=2
+set maxmempattern=2000000
 set clipboard^=unnamed,unnamedplus
 filetype plugin indent on
 
