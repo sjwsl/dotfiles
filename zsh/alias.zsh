@@ -15,8 +15,6 @@ else # macOS `ls`
 fi
 
 # List all files colorized in long format, excluding . and ..
-alias ll="ls -lF ${colorflag}"
+alias ll="ls -lhF ${colorflag}"
 # List only directories
-alias ld="ls -lF ${colorflag} | grep --color=never '^d'"
-# Always use color output for `ls`
-alias ls="command ls ${colorflag}"
+alias ld="ls -lhF ${colorflag} | grep --color=never '^d'"
