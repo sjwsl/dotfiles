@@ -28,3 +28,4 @@ xnoremap <leader>s :<C-U><C-R>=printf("Leaderf! rg -F -e %s", leaderf#Rg#visual(
 noremap <leader>p :Leaderf rg -F<CR>
 noremap <leader>r :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
 noremap <leader>d :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+noremap <leader>g :Leaderf gtags<CR>
