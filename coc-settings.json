@@ -1,5 +1,5 @@
 {
 	"python.linting.pylintEnabled": true,
-	"diagnostic.refreshOnInsertMode": true
-	// ,"clangd.semanticHighlighting": true	
+	"diagnostic.refreshOnInsertMode": true,
+	"clangd.semanticHighlighting": true
 }
