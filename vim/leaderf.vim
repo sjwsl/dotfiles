@@ -6,3 +6,4 @@ let g:Lf_RgConfig = [
         \ "--max-columns=150",
         \ "--hidden"
 				\ ]
+let g:Lf_PreviewInPopup = 1
