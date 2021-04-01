@@ -6,3 +6,4 @@ let g:Lf_RgConfig = [
         \ "--hidden"
 				\ ]
 let g:Lf_PreviewInPopup = 1
+let g:Lf_UseVersionControlTool = 0
