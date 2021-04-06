@@ -16,8 +16,10 @@ Plug 'majutsushi/tagbar'
 Plug 'ryanoasis/vim-devicons'
 " Plug 'ludovicchabant/vim-gutentags'
 Plug 'tpope/vim-fugitive'
+Plug 'mhinz/vim-signify'
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'junegunn/gv.vim'
 " Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 
