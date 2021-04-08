@@ -93,6 +93,6 @@ noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
 
-for f in split(glob('/Users/xutianshu/.dotfiles/vim/*.vim'), '\n')
+for f in split(glob('~/.vim/*.vim'), '\n')
     exe 'source' f
 endfor
