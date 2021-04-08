@@ -18,8 +18,10 @@ function! s:show_documentation()
   endif
 endfunction
 
-" toggle
+" tagbar
 noremap tt :TagbarToggle<CR>
+
+" NERDTree
 noremap td :NERDTreeToggle<CR>
 
 " Leaderf
