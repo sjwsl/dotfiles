@@ -41,7 +41,7 @@ let &t_SR = "\<esc>[6 q"
 let &t_EI = "\<esc>[2 q"
 
 " common
-set updatetime = 100
+set updatetime=100
 set mouse=a
 set noerrorbells
 set number
