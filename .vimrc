@@ -62,6 +62,8 @@ set pumheight=10
 set laststatus=2
 set maxmempattern=2000000
 set clipboard^=unnamed,unnamedplus
+set foldmethod=syntax
+set foldlevel=9999
 filetype plugin indent on
 
 " indent
@@ -99,4 +101,3 @@ noremap <leader>0 :tablast<cr>
 for f in split(glob('/Users/xutianshu/.dotfiles/vim/*.vim'), '\n')
     exe 'source' f
 endfor
-
