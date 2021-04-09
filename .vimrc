@@ -47,7 +47,6 @@ set updatetime=100
 set mouse=a
 set noerrorbells
 set number
-set relativenumber
 set cursorline
 set wildmenu
 set showmatch
