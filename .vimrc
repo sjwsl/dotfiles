@@ -3,7 +3,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline-themes'
 Plug 'Krasjet/auto.pairs'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'skywind3000/asyncrun.vim'
@@ -16,12 +16,13 @@ Plug 'mhinz/vim-signify'
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'junegunn/gv.vim'
+Plug 'morhetz/gruvbox'
 call plug#end()
 
 " theme
 set background=dark
-colorscheme palenight
-let g:airline_theme = "palenight"
+set termguicolors
+autocmd vimenter * ++nested colorscheme gruvbox
 let g:palenight_terminal_italics=1
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
