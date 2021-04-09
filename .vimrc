@@ -21,9 +21,9 @@ call plug#end()
 
 " theme
 set background=dark
-set termguicolors
 colorscheme gruvbox
-highlight Normal guibg=none
+set termguicolors
+hi Normal guibg=none
 let g:palenight_terminal_italics=1
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -94,6 +94,6 @@ noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
 
-for f in split(glob('~/.vim/*.vim'), '\n')
+for f in split(glob('~/.dotfiles/.vim/*.vim'), '\n')
     exe 'source' f
 endfor
