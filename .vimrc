@@ -22,7 +22,8 @@ call plug#end()
 " theme
 set background=dark
 set termguicolors
-autocmd vimenter * ++nested colorscheme gruvbox
+colorscheme gruvbox
+highlight Normal guibg=none
 let g:palenight_terminal_italics=1
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
