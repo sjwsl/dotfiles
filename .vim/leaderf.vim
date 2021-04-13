@@ -7,3 +7,4 @@ let g:Lf_RgConfig = [
 				\ ]
 let g:Lf_PreviewInPopup = 1
 let g:Lf_UseVersionControlTool = 0
+let g:Lf_ShowHidden = 1 

@@ -1,23 +1,29 @@
 call plug#begin('~/.vim/plugged')
+Plug 'christoomey/vim-system-copy'
+Plug 'godlygeek/tabular'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
 Plug 'Krasjet/auto.pairs'
-Plug 'drewtempelmeyer/palenight.vim'
-Plug 'skywind3000/asyncrun.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
-Plug 'majutsushi/tagbar'
+Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
+
+" theme
+Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
 Plug 'ryanoasis/vim-devicons'
+" Plug 'vim-airline/vim-airline-themes'
+" Plug 'drewtempelmeyer/palenight.vim'
+
+" git
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
-Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
-Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'junegunn/gv.vim'
-Plug 'morhetz/gruvbox'
-Plug 'christoomey/vim-system-copy'
+
+" c++
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'majutsushi/tagbar'
+Plug 'jackguo380/vim-lsp-cxx-highlight'
 call plug#end()
 
 " theme
@@ -30,20 +36,14 @@ if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
-let mapleader=" "
-noremap , <C-W>
-inoremap jk <ESC>
-
-" for navigate in completion box
-cnoremap <up> <C-P>
-cnoremap <down> <C-N>
-
-" change cursor shape in diffrent modes
+" change cursor shape in different modes
 let &t_SI = "\<esc>[6 q"
 let &t_SR = "\<esc>[6 q"
 let &t_EI = "\<esc>[2 q"
 
 " common
+filetype plugin indent on
+autocmd FileType latex,tex,md,markdown setlocal spell
 set updatetime=100
 set mouse=a
 set noerrorbells
@@ -62,7 +62,6 @@ set maxmempattern=2000000
 " set clipboard^=unnamed,unnamedplus
 set foldmethod=syntax
 set foldlevel=9999
-filetype plugin indent on
 
 " indent
 set autoindent
