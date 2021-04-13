@@ -17,6 +17,7 @@ Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'junegunn/gv.vim'
 Plug 'morhetz/gruvbox'
+Plug 'christoomey/vim-system-copy'
 call plug#end()
 
 " theme
@@ -24,7 +25,7 @@ set background=dark
 colorscheme gruvbox
 set termguicolors
 hi Normal guibg=none
-let g:palenight_terminal_italics=1
+" let g:palenight_terminal_italics=1
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
@@ -47,6 +48,7 @@ set updatetime=100
 set mouse=a
 set noerrorbells
 set number
+set relativenumber
 set cursorline
 set wildmenu
 set showmatch
@@ -57,7 +59,7 @@ set ttimeoutlen=5
 set pumheight=10
 set laststatus=2
 set maxmempattern=2000000
-set clipboard^=unnamed,unnamedplus
+" set clipboard^=unnamed,unnamedplus
 set foldmethod=syntax
 set foldlevel=9999
 filetype plugin indent on
