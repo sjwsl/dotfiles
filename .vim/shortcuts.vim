@@ -1,3 +1,12 @@
+let mapleader=" "
+noremap , <C-W>
+inoremap jk <ESC>
+nnoremap <leader>h :nohlsearch<CR>
+
+" navigate in completion box
+cnoremap <up> <C-P>
+cnoremap <down> <C-N>
+
 " coc
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
@@ -33,3 +42,21 @@ noremap <leader>R :<C-U><C-R>=printf("Leaderf gtags -s %s --auto-jump", expand("
 noremap <leader>d :<C-U><C-R>=printf("Leaderf gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
 noremap <leader>g :Leaderf gtags<CR>
 noremap <leader>m :Leaderf mru<CR>
+
+" movement
+noremap B ^
+noremap E $
+noremap $ <nop>
+noremap ^ <nop>
+
+" tab
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>

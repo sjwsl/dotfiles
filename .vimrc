@@ -76,25 +76,6 @@ set incsearch
 set ignorecase
 set smartcase
 set hlsearch
-nnoremap <leader>h :nohlsearch<CR>
-
-" movement
-noremap B ^
-noremap E $
-noremap $ <nop>
-noremap ^ <nop>
-
-" tab
-noremap <leader>1 1gt
-noremap <leader>2 2gt
-noremap <leader>3 3gt
-noremap <leader>4 4gt
-noremap <leader>5 5gt
-noremap <leader>6 6gt
-noremap <leader>7 7gt
-noremap <leader>8 8gt
-noremap <leader>9 9gt
-noremap <leader>0 :tablast<cr>
 
 for f in split(glob('~/.dotfiles/.vim/*.vim'), '\n')
     exe 'source' f
