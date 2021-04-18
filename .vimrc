@@ -5,7 +5,7 @@ Plug 'godlygeek/tabular'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'Krasjet/auto.pairs'
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 Plug 'easymotion/vim-easymotion'
@@ -41,7 +41,7 @@ endif
 " change cursor shape in different modes
 let &t_SI = "\<esc>[6 q"
 let &t_SR = "\<esc>[6 q"
-let &t_EI = "\<esc>[2 q"
+lt &t_EI = "\<esc>[2 q"
 
 " common
 filetype plugin indent on
