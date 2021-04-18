@@ -1,5 +1,4 @@
 let mapleader=" "
-noremap , <C-W>
 inoremap jk <ESC>
 nnoremap <leader>h :nohlsearch<CR>
 
@@ -28,26 +27,21 @@ function! s:show_documentation()
 endfunction
 
 " tagbar
-noremap tt :TagbarToggle<CR>
+noremap <leader>t :TagbarToggle<CR>
 
 " NERDTree
-noremap td :NERDTreeToggle<CR>
+noremap <leader>d :edit .<CR>
 
 " Leaderf
-nnoremap <leader>s :<C-U><C-R>=printf("Leaderf rg -F -e %s", expand("<cword>"))<CR><CR>
-xnoremap <leader>s :<C-U><C-R>=printf("Leaderf rg -F -e %s", leaderf#Rg#visual())<CR><CR>
-noremap <leader>p :Leaderf rg -F<CR>
-noremap <leader>r :<C-U><C-R>=printf("Leaderf gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
-noremap <leader>R :<C-U><C-R>=printf("Leaderf gtags -s %s --auto-jump", expand("<cword>"))<CR><CR>
-noremap <leader>d :<C-U><C-R>=printf("Leaderf gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
-noremap <leader>g :Leaderf gtags<CR>
-noremap <leader>m :Leaderf mru<CR>
-
-" movement
-noremap B ^
-noremap E $
-noremap $ <nop>
-noremap ^ <nop>
+nnoremap <leader>fs :<C-U><C-R>=printf("Leaderf rg -F -e %s", expand("<cword>"))<CR><CR>
+xnoremap <leader>fs :<C-U><C-R>=printf("Leaderf rg -F -e %s", leaderf#Rg#visual())<CR><CR>
+noremap <leader>fp :Leaderf rg -F<CR>
+noremap <leader>fr :<C-U><C-R>=printf("Leaderf gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
+noremap <leader>fR :<C-U><C-R>=printf("Leaderf gtags -s %s --auto-jump", expand("<cword>"))<CR><CR>
+noremap <leader>fd :<C-U><C-R>=printf("Leaderf gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+noremap <leader>fg :Leaderf gtags<CR>
+noremap <leader>fm :Leaderf mru<CR>
+noremap <leader>ff :Leaderf file<CR>
 
 " tab
 noremap <leader>1 1gt

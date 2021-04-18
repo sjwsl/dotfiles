@@ -1,4 +1,5 @@
 call plug#begin('~/.vim/plugged')
+Plug 'takac/vim-hardtime'
 Plug 'christoomey/vim-system-copy'
 Plug 'godlygeek/tabular'
 Plug 'tpope/vim-surround'
@@ -7,6 +8,7 @@ Plug 'Krasjet/auto.pairs'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
+Plug 'easymotion/vim-easymotion'
 
 " theme
 Plug 'morhetz/gruvbox'
