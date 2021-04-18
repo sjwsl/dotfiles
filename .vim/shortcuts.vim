@@ -9,7 +9,7 @@ cnoremap <down> <C-N>
 " coc
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
-nmap <silent> ,gd :vsp<CR><Plug>(coc-definition)
+nmap <silent> <C-W>gd :vsp<CR><Plug>(coc-definition)
 nmap <silent> gd <Plug>(coc-definition) 
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> rn <Plug>(coc-rename)
