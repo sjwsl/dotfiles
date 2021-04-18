@@ -13,7 +13,7 @@ Plug 'easymotion/vim-easymotion'
 " theme
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
-Plug 'ryanoasis/vim-devicons'
+" Plug 'ryanoasis/vim-devicons'
 " Plug 'vim-airline/vim-airline-themes'
 " Plug 'drewtempelmeyer/palenight.vim'
 
@@ -41,7 +41,7 @@ endif
 " change cursor shape in different modes
 let &t_SI = "\<esc>[6 q"
 let &t_SR = "\<esc>[6 q"
-lt &t_EI = "\<esc>[2 q"
+let &t_EI = "\<esc>[2 q"
 
 " common
 filetype plugin indent on

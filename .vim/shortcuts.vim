@@ -11,7 +11,6 @@ nmap <Leader>a <Plug>(easymotion-overwin-f)
 nmap s <Plug>(easymotion-overwin-f2)
 nmap <Leader>l <Plug>(easymotion-overwin-line)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
-nmap <le
 
 " coc
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
