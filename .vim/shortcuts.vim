@@ -7,9 +7,10 @@ cnoremap <up> <C-P>
 cnoremap <down> <C-N>
 
 " easymotion 
-nmap s <Plug>(easymotion-overwin-f)
+nmap s <Plug>(easymotion-overwin-f2)
 nmap <Leader>j <Plug>(easymotion-j)
 nmap <Leader>k <Plug>(easymotion-k)
+nmap <Leader>w <Plug>(easymotion-bd-w)
 
 " coc
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
