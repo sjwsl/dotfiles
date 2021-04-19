@@ -45,7 +45,6 @@ let &t_SR = "\<esc>[6 q"
 let &t_EI = "\<esc>[2 q"
 
 " common
-set fencs=utf-8,chinese
 filetype plugin indent on
 autocmd FileType latex,tex,md,markdown setlocal spell | setlocal spelllang=en_us,cjk
 set updatetime=100
