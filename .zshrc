@@ -23,6 +23,7 @@ fi
 zplug load
 
 # User configuration
+export LANG=zh_CN.UTF-8
 export EDITOR='vim'
 export TERM=xterm-256color
 
