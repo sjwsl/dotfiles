@@ -1,7 +1,8 @@
 call plug#begin('~/.vim/plugged')
 Plug 'takac/vim-hardtime'
 Plug 'christoomey/vim-system-copy'
-Plug 'godlygeek/tabular'
+" Plug 'godlygeek/tabular'
+Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'Krasjet/auto.pairs'

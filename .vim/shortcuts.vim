@@ -6,6 +6,10 @@ nnoremap <leader>h :nohlsearch<CR>
 cnoremap <up> <C-P>
 cnoremap <down> <C-N>
 
+" easyalign
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
 " easymotion 
 nmap s <Plug>(easymotion-overwin-f2)
 map <Leader>j <Plug>(easymotion-j)
