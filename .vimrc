@@ -48,6 +48,7 @@ let &t_EI = "\<esc>[2 q"
 " common
 filetype plugin indent on
 autocmd FileType latex,tex,md,markdown setlocal spell | setlocal spelllang=en_us,cjk
+set noswapfile 
 set updatetime=100
 set mouse=a
 set noerrorbells
