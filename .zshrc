@@ -27,8 +27,6 @@ export LANG=zh_CN.UTF-8
 export EDITOR='vim'
 export TERM=xterm-256color
 
-export PATH="/Users/xutianshu/anaconda3/bin/:$PATH"
-
 # zsh-z
 autoload -U compinit && compinit
 zstyle ':completion:*' menu select
@@ -44,22 +42,6 @@ zstyle ':completion:*'  matcher-list 'm:{a-z}={A-Z}'
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/xutianshu/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/xutianshu/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/xutianshu/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/xutianshu/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -73,6 +55,11 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
+# List all files colorized in long format, excluding . and ..
+alias ll="ls -lhF ${colorflag}"
+# List only directories
+alias ld="ls -lhF ${colorflag} | grep --color=never '^d'"
+
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
 	colorflag="--color"
@@ -80,7 +67,19 @@ else # macOS `ls`
 	colorflag="-G"
 fi
 
-# List all files colorized in long format, excluding . and ..
-alias ll="ls -lhF ${colorflag}"
-# List only directories
-alias ld="ls -lhF ${colorflag} | grep --color=never '^d'"
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('$HOME/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "$HOME/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="$HOME/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+
+export PATH="$HOME/anaconda3/bin/:$PATH"
+# <<< conda initialize <<<
