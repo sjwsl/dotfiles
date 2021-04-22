@@ -1,4 +1,5 @@
 call plug#begin('~/.vim/plugged')
+Plug 'honza/vim-snippets'
 Plug 'takac/vim-hardtime'
 Plug 'christoomey/vim-system-copy'
 " Plug 'godlygeek/tabular'
