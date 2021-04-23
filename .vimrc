@@ -2,12 +2,10 @@ call plug#begin('~/.vim/plugged')
 Plug 'honza/vim-snippets'
 Plug 'takac/vim-hardtime'
 Plug 'christoomey/vim-system-copy'
-" Plug 'godlygeek/tabular'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'Krasjet/auto.pairs'
-" Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 Plug 'easymotion/vim-easymotion'
@@ -16,9 +14,6 @@ Plug 'lervag/vimtex'
 " theme
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
-" Plug 'ryanoasis/vim-devicons'
-" Plug 'vim-airline/vim-airline-themes'
-" Plug 'drewtempelmeyer/palenight.vim'
 
 " git
 Plug 'tpope/vim-fugitive'
@@ -26,10 +21,13 @@ Plug 'mhinz/vim-signify'
 Plug 'junegunn/gv.vim'
 
 " c++
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'majutsushi/tagbar'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+let g:coc_global_extensions = ['coc-tabnine', 'coc-snippets', 'coc-vimtex', 'coc-json', 'coc-cmake', 'coc-pyright', 'coc-clang-format-style-options']
 call plug#end()
+
 
 " theme
 set background=dark
