@@ -1,7 +1,6 @@
 call plug#begin('~/.vim/plugged')
 Plug 'honza/vim-snippets'
 Plug 'takac/vim-hardtime'
-Plug 'christoomey/vim-system-copy'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -34,7 +33,6 @@ set background=dark
 colorscheme gruvbox
 set termguicolors
 hi Normal guibg=none
-" let g:palenight_terminal_italics=1
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif

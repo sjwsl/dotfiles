@@ -3,6 +3,8 @@ inoremap jk <ESC>
 inoremap kj <ESC>
 inoremap <ESC> <NOP>
 nnoremap <leader>h :nohlsearch<CR>
+nnoremap cp "+y
+xnoremap cp "+y
 
 " navigate in completion box
 cnoremap <up> <C-P>
@@ -13,7 +15,7 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " easymotion 
-nmap s <Plug>(easymotion-overwin-f2)
+nmap s <Plug>(easymotion-overwin-f)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 map <Leader>w <Plug>(easymotion-bd-w)
