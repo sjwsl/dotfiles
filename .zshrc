@@ -55,17 +55,17 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-# List all files colorized in long format, excluding . and ..
-alias ll="ls -lhF ${colorflag}"
-# List only directories
-alias ld="ls -lhF ${colorflag} | grep --color=never '^d'"
-
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
 	colorflag="--color"
 else # macOS `ls`
 	colorflag="-G"
 fi
+
+# List all files colorized in long format, excluding . and ..
+alias ll="ls -lhF ${colorflag}"
+# List only directories
+alias ld="ls -lhF ${colorflag} | grep --color=never '^d'"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
