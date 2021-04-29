@@ -27,6 +27,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = ['coc-tabnine', 'coc-snippets', 'coc-vimtex', 'coc-json', 'coc-cmake', 'coc-pyright', 'coc-clang-format-style-options']
 call plug#end()
 
+let g:vimspector_enable_mappings = 'HUMAN'
 
 " theme
 set background=dark
@@ -79,6 +80,6 @@ set ignorecase
 set smartcase
 set hlsearch
 
-for f in split(glob('~/.dotfiles/.vim/*.vim'), '\n')
+for f in split(glob('~/.vim/*.vim'), '\n')
     exe 'source' f
 endfor
