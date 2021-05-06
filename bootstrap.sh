@@ -24,14 +24,16 @@ function mac_init() {
 	brew install git
 	brew install neovim
 	brew install tmux
+  brew install fzf
 }
 
 function linux_init() {
-  suto apt update
+  sudo apt update
   sudo apt install -y coreutils
   sudo apt install -y git
   sudo apt install -y neovim
   sudo apt install -y tmux
+  sudo apt-get install -y fzf
 }
 
 function init() {
