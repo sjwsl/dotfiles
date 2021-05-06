@@ -8,10 +8,13 @@ function sync() {
 			-avh --no-perms . ~
 
 	source ~/.zshrc
+
 	tmux source-file ~/.tmux.conf 
+
+  nvim -c 'PlugInstall|q|q'
 }
 
-function init() {
+function mac_init() {
 	if ! [ -x "$(command -v brew)" ]; then
 		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	fi
@@ -22,20 +25,35 @@ function init() {
 	brew install zplug
 	brew install neovim
 	brew install tmux
+}
+
+function linux_init() {
+  # install zplug
+  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+
+  suto apt update
+  sudo apt install -y coreutils
+  sudo apt install -y git
+  sudo apt install -y neovim
+  sudo apt install -y tmux
+}
+
+function init() {
+  if [ "$(uname)" = "Darwin" ]; then
+    mac_init
+  else
+    linux_init
+  fi
 
   # install vim-plug
   sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-
-  vim -c 'PlugInstall' -c 'q' -c 'q'
-
-	sync
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 }
 
 if [ "$1" = "--init" ] || [ "$1" = "-i" ]; then
 	init
-else
-	sync
 fi
 
-unset brew sync init
+sync
+
+unset brew sync init mac_init
