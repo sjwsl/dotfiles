@@ -22,15 +22,11 @@ function mac_init() {
 	brew update
 	brew install coreutils
 	brew install git
-	brew install zplug
 	brew install neovim
 	brew install tmux
 }
 
 function linux_init() {
-  # install zplug
-  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-
   suto apt update
   sudo apt install -y coreutils
   sudo apt install -y git
@@ -45,7 +41,11 @@ function init() {
     linux_init
   fi
 
-  # install vim-plug
+  # zplug
+  rm -rf $HOME/.zplug
+  git clone https://github.com/zplug/zplug $HOME/.zplug
+
+  # vim-plug
   sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 }
