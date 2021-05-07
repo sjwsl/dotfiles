@@ -5,12 +5,19 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-source $HOME/.zplug/init.zsh
+if [ "$(uname)" = "Darwin" ]; then
+  export ZPLUG_HOME=/usr/local/opt/zplug
+else
+  export ZPLUG_HOME=$HOME/.zplug
+fi
+
+source $ZPLUG_HOME/init.zsh
 
 zplug "agkozak/zsh-z"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "romkatv/powerlevel10k", as:theme, depth:1
+zplug "sobolevn/wakatime-zsh-plugin"
 
 if ! zplug check; then
     printf "Install? [y/N]: "

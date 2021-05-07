@@ -25,6 +25,7 @@ function mac_init() {
 	brew install neovim
 	brew install tmux
   brew install fzf
+  brew install zplug
 }
 
 function linux_init() {
@@ -34,6 +35,10 @@ function linux_init() {
   sudo apt install -y neovim
   sudo apt install -y tmux
   sudo apt-get install -y fzf
+
+  # zplug
+  rm -rf $HOME/.zplug
+  git clone https://github.com/zplug/zplug $HOME/.zplug
 }
 
 function init() {
@@ -42,10 +47,6 @@ function init() {
   else
     linux_init
   fi
-
-  # zplug
-  rm -rf $HOME/.zplug
-  git clone https://github.com/zplug/zplug $HOME/.zplug
 
   # vim-plug
   sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
