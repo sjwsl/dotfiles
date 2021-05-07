@@ -25,7 +25,6 @@ function mac_init() {
 	brew install neovim
 	brew install tmux
   brew install fzf
-  brew install zplug
 }
 
 function linux_init() {
@@ -59,4 +58,4 @@ fi
 
 sync
 
-unset brew sync init mac_init
+unset brew sync init mac_init linux_init
