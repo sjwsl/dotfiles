@@ -13,7 +13,7 @@ Supported on
 - Ubuntu
 
 Tested on
-- macOS Big Sur 11.2.2
+- macOS Big Sur
 - Ubuntu 20.04 LTS
 
 ## Installation
