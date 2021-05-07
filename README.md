@@ -1,5 +1,7 @@
 # dotfiles
 
+<img width="2560" alt="Screenshot 2021-05-07 at 18 27 27" src="https://user-images.githubusercontent.com/44310559/117436729-e4306f00-af61-11eb-9131-952c88f2bd64.png">
+
 This is my personal Unix dotfiles including
 - zsh
 - tmux
