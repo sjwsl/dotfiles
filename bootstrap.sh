@@ -20,6 +20,7 @@ function mac_init() {
 	fi
 
 	brew update
+  brew install zsh
 	brew install coreutils
 	brew install git
 	brew install neovim
@@ -29,6 +30,7 @@ function mac_init() {
 
 function linux_init() {
   sudo apt update
+  sudo apt install -y zsh
   sudo apt install -y coreutils
   sudo apt install -y git
   sudo apt install -y neovim
