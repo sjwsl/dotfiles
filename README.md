@@ -8,10 +8,6 @@ This is my personal Unix dotfiles including
 - neovim
 - ...
 
-Supported on
-- macOS 
-- Ubuntu
-
 Tested on
 - macOS Big Sur
 - Ubuntu 20.04 LTS
