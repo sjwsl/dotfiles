@@ -5,6 +5,12 @@ inoremap <ESC> <NOP>
 nnoremap <leader>h :nohlsearch<CR>
 nnoremap cp "+y
 xnoremap cp "+y
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
 
 " navigate in completion box
 cnoremap <up> <C-P>
