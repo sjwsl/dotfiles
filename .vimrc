@@ -9,6 +9,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 Plug 'easymotion/vim-easymotion'
 Plug 'lervag/vimtex'
+Plug 'wakatime/vim-wakatime'
 
 " theme
 Plug 'morhetz/gruvbox'
