@@ -38,9 +38,7 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " easymotion 
-nmap s <Plug>(easymotion-f)
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
+nmap s <Plug>(easymotion-bd-f)
 map <Leader>w <Plug>(easymotion-bd-w)
 
 " coc
