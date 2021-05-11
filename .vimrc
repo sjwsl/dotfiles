@@ -43,6 +43,7 @@ let &t_SR = "\<esc>[6 q"
 let &t_EI = "\<esc>[2 q"
 
 " common
+language en_US.UTF-8
 filetype plugin indent on
 autocmd FileType latex,tex,md,markdown setlocal spell | setlocal spelllang=en_us,cjk
 set noswapfile 
