@@ -34,6 +34,17 @@ export EDITOR='vim'
 export TERM=xterm-256color
 setopt AUTOPUSHD
 
+#set history size
+export HISTSIZE=10000
+#save history after logout
+export SAVEHIST=10000
+#history file
+export HISTFILE=~/.zsh_history
+#append into history file
+setopt INC_APPEND_HISTORY
+#save only one command if 2 common are same and consistent
+setopt HIST_IGNORE_DUPS
+
 # zsh-z
 autoload -U compinit && compinit
 zstyle ':completion:*' menu select
