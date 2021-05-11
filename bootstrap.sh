@@ -19,6 +19,8 @@ function mac_init() {
 		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	fi
 
+  open ./Gruvbox\ Dark.itermcolors
+
 	brew update
   brew install zsh
 	brew install coreutils
