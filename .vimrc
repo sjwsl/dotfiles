@@ -4,7 +4,7 @@ Plug 'takac/vim-hardtime'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'Krasjet/auto.pairs'
+" Plug 'Krasjet/auto.pairs'
 Plug 'scrooloose/nerdcommenter'
 Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 Plug 'easymotion/vim-easymotion'
@@ -25,7 +25,7 @@ Plug 'majutsushi/tagbar'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-let g:coc_global_extensions = ['coc-tabnine', 'coc-snippets', 'coc-vimtex', 'coc-json', 'coc-cmake', 'coc-pyright', 'coc-clang-format-style-options']
+let g:coc_global_extensions = ['coc-tabnine', 'coc-snippets', 'coc-vimtex', 'coc-json', 'coc-cmake', 'coc-pyright', 'coc-clang-format-style-options', 'coc-python']
 call plug#end()
 
 " theme
