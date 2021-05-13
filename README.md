@@ -1,6 +1,6 @@
 # dotfiles
 
-<img width="2560" alt="Screenshot 2021-05-07 at 18 27 27" src="https://user-images.githubusercontent.com/44310559/117436729-e4306f00-af61-11eb-9131-952c88f2bd64.png">
+<img width="2560" alt="Screenshot 2021-05-13 at 17 04 39" src="https://user-images.githubusercontent.com/44310559/118104159-5a731c80-b40d-11eb-9658-bbf3fdac4dbb.png">
 
 This is my personal Unix dotfiles including
 - zsh
