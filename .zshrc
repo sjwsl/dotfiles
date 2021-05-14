@@ -24,7 +24,7 @@ zplug "romkatv/powerlevel10k", as:theme, depth:1
 zplug "sobolevn/wakatime-zsh-plugin"
 
 if ! zplug check; then
-    printf "Install? [y/N]: "
+    printf "Install zsh plugins? [y/N]: "
     if read -q; then
         echo; zplug install
     fi
