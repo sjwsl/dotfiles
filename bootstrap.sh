@@ -7,13 +7,11 @@ function sync() {
 			--exclude "README.md" \
 			-avh --no-perms . ~
   
-  zsh
-
-	source ~/.zshrc
-
 	tmux source-file ~/.tmux.conf 
 
   nvim -c 'PlugInstall|qa'
+
+  zsh
 }
 
 function mac_init() {
