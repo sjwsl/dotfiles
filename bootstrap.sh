@@ -22,6 +22,7 @@ function mac_init() {
   open ./Gruvbox\ Dark.itermcolors
 
 	brew update
+  brew install rsync
   brew install curl
   brew install zsh
 	brew install coreutils
@@ -33,6 +34,7 @@ function mac_init() {
 
 function linux_init() {
   sudo apt update
+  sudo apt install -y rsync
   sudo apt install -y curl
   sudo apt install -y zsh
   sudo apt install -y coreutils
