@@ -9,7 +9,7 @@ function sync() {
   
 	tmux source-file ~/.tmux.conf 
 
-  nvim -c 'PlugInstall|qa'
+  nvim -c 'PlugInstall|CocInstall|qa'
 
   zsh
 }
