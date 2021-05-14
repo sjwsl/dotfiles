@@ -35,7 +35,7 @@ function mac_init() {
 
 function linux_init() {
   sudo apt update
-  sudo apt install -y node
+  sudo apt install -y nodejs
   sudo apt install -y rsync
   sudo apt install -y curl
   sudo apt install -y zsh
