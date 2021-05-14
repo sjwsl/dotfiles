@@ -6,6 +6,8 @@ function sync() {
 			--exclude "bootstrap.sh" \
 			--exclude "README.md" \
 			-avh --no-perms . ~
+  
+  zsh
 
 	source ~/.zshrc
 
