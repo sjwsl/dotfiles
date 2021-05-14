@@ -5,6 +5,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+export LANG=zh_CN.UTF-8
+export LC_ALL=zh_CN.UTF-8
+export LANGUAGE=zh_CN.UTF-8
+
 if [ "$(uname)" = "Darwin" ]; then
   export ZPLUG_HOME=/usr/local/opt/zplug
 else
@@ -29,7 +33,6 @@ fi
 zplug load
 
 # User configuration
-export LANG=zh_CN.UTF-8
 export EDITOR='vim'
 export TERM=xterm-256color
 setopt AUTOPUSHD
