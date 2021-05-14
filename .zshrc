@@ -48,14 +48,17 @@ setopt INC_APPEND_HISTORY
 #save only one command if 2 common are same and consistent
 setopt HIST_IGNORE_DUPS
 
+# make search up and down work, so partially type and hit up/down to find relevant stuff
+# todo: platform-specific
+bindkey '^[[A' history-beginning-search-backward
+bindkey '^[[B' history-beginning-search-forward
+bindkey '^[OA' history-beginning-search-backward
+bindkey '^[OB' history-beginning-search-forward
+
 # zsh-z
 autoload -U compinit && compinit
 zstyle ':completion:*' menu select
 export ZSHZ_CASE=smart
-
-# make search up and down work, so partially type and hit up/down to find relevant stuff
-bindkey '^[[A' up-line-or-search                                                
-bindkey '^[[B' down-line-or-search
 
 # smart-case completion
 zstyle ':completion:*'  matcher-list 'm:{a-z}={A-Z}'
