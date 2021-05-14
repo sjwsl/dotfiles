@@ -6,7 +6,7 @@ function sync() {
 			--exclude "bootstrap.sh" \
 			--exclude "README.md" \
       --exclude "LICENSE" \
-      --exclude "Gruvbox.itermcolors"
+      --exclude "Gruvbox.itermcolors" \
 			-avh --no-perms . ~
   
 	tmux source-file ~/.tmux.conf 
