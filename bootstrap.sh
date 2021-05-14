@@ -52,7 +52,7 @@ function linux_init() {
   sudo apt install -y git
   sudo apt install -y neovim
   sudo apt install -y tmux
-  sudo apt-get insatll -y locales
+  sudo apt-get install -y locales
   sudo apt-get install -y fzf
 
   locale-gen en_US.UTF-8 
