@@ -11,7 +11,7 @@ function sync() {
 
 	tmux source-file ~/.tmux.conf 
 
-  nvim -c 'PlugInstall|q|q'
+  nvim -c 'PlugInstall|qa'
 }
 
 function mac_init() {
@@ -22,6 +22,8 @@ function mac_init() {
   open ./Gruvbox\ Dark.itermcolors
 
 	brew update
+  brew install npm
+  brew install yarn
   brew install node
   brew install rsync
   brew install curl
@@ -35,6 +37,8 @@ function mac_init() {
 
 function linux_init() {
   sudo apt update
+  sudo apt install -y npm
+  sudo apt install -y yarn
   sudo apt install -y nodejs
   sudo apt install -y rsync
   sudo apt install -y curl
@@ -43,7 +47,11 @@ function linux_init() {
   sudo apt install -y git
   sudo apt install -y neovim
   sudo apt install -y tmux
+  sudo apt-get insatll -y locales
   sudo apt-get install -y fzf
+
+  locale-gen en_US.UTF-8 
+  locale-gen zh_CN.UTF-8
 
   # zplug
   rm -rf $HOME/.zplug
