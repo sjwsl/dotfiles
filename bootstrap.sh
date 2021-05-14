@@ -5,6 +5,8 @@ function sync() {
 			--exclude ".DS_Store" \
 			--exclude "bootstrap.sh" \
 			--exclude "README.md" \
+      --exclude "LICENSE" \
+      --exclude "Gruvbox.itermcolors"
 			-avh --no-perms . ~
   
 	tmux source-file ~/.tmux.conf 
@@ -19,9 +21,8 @@ function mac_init() {
 		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	fi
 
-  open ./Gruvbox\ Dark.itermcolors
-
 	brew update
+  brew install python3
   brew install npm
   brew install yarn
   brew install node
@@ -33,15 +34,19 @@ function mac_init() {
 	brew install neovim
 	brew install tmux
   brew install fzf
+
+  open ./Gruvbox.itermcolors
 }
 
 function linux_init() {
   if ! [ -x "$(command -v sudo)" ]; then
     apt update
     apt install sudo
+  else
+    sudo apt update
   fi
 
-  sudo apt update
+  sudo apt install -y python
   sudo apt install -y npm
   sudo apt install -y yarn
   sudo apt install -y nodejs
@@ -52,6 +57,7 @@ function linux_init() {
   sudo apt install -y git
   sudo apt install -y neovim
   sudo apt install -y tmux
+  sudo apt-get install -y ripgrep
   sudo apt-get install -y locales
   sudo apt-get install -y fzf
 
