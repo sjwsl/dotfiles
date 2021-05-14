@@ -36,6 +36,11 @@ function mac_init() {
 }
 
 function linux_init() {
+  if ! [ -x "$(command -v sudo)" ]; then
+    apt update
+    apt install sudo
+  fi
+
   sudo apt update
   sudo apt install -y npm
   sudo apt install -y yarn
