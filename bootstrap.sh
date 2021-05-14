@@ -46,6 +46,8 @@ function linux_init() {
     sudo apt update
   fi
 
+  curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+
   sudo apt install -y python
   sudo apt install -y npm
   sudo apt install -y yarn
