@@ -1,5 +1,18 @@
 #!/usr/bin/env zsh
 
+function sync() {
+	rsync --exclude ".git/" \
+			--exclude ".DS_Store" \
+			--exclude "bootstrap.sh" \
+			--exclude "README.md" \
+			-avh --no-perms . ~
+
+	source ~/.zshrc
+
+	tmux source-file ~/.tmux.conf 
+
+  nvim -c 'PlugInstall|qa'
+}
 
 function mac_init() {
 	if ! [ -x "$(command -v brew)" ]; then
@@ -43,20 +56,6 @@ function linux_init() {
   # zplug
   rm -rf $HOME/.zplug
   git clone https://github.com/zplug/zplug $HOME/.zplug
-}
-
-function sync() {
-	rsync --exclude ".git/" \
-			--exclude ".DS_Store" \
-			--exclude "bootstrap.sh" \
-			--exclude "README.md" \
-			-avh --no-perms . ~
-
-	source ~/.zshrc
-
-	tmux source-file ~/.tmux.conf 
-
-  nvim -c 'PlugInstall|qa'
 }
 
 function init() {
