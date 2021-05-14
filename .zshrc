@@ -49,11 +49,15 @@ setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_DUPS
 
 # make search up and down work, so partially type and hit up/down to find relevant stuff
-# todo: platform-specific
-bindkey '^[[A' history-beginning-search-backward
-bindkey '^[[B' history-beginning-search-forward
-bindkey '^[OA' history-beginning-search-backward
-bindkey '^[OB' history-beginning-search-forward
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "$key[Up]" up-line-or-beginning-search
+bindkey "$key[Down]" down-line-or-beginning-search
+# todo: OSX $key and $terminfo values are both wrong, so hardcode
+bindkey '^[[A' up-line-or-beginning-search
+bindkey '^[[B' down-line-or-beginning-search
 
 # zsh-z
 autoload -U compinit && compinit
