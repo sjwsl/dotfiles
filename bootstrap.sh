@@ -50,7 +50,7 @@ function linux_init() {
 
   sudo apt install -y python
   sudo apt install -y pip
-  sudo apt install -y gtags
+  sudo apt install -y global
   sudo apt install -y npm
   sudo apt install -y yarn
   sudo apt install -y nodejs
