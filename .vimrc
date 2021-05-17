@@ -14,7 +14,7 @@ Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'wakatime/vim-wakatime'
 Plug 'Yggdroot/LeaderF'
-let g:coc_global_extensions = ['coc-tabnine', 'coc-snippets', 'coc-json', 'coc-clang-format-style-options', 'coc-python']
+let g:coc_global_extensions = ['coc-cmake', 'coc-tabnine', 'coc-snippets', 'coc-json', 'coc-clang-format-style-options', 'coc-python']
 call plug#end()
 
 " theme
