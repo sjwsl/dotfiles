@@ -1,14 +1,9 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
+# language
 export LANG=zh_CN.UTF-8
 export LC_ALL=zh_CN.UTF-8
 export LANGUAGE=zh_CN.UTF-8
 
+# zplug
 if [ "$(uname)" = "Darwin" ]; then
   export ZPLUG_HOME=/usr/local/opt/zplug
 else
@@ -32,23 +27,27 @@ fi
 
 zplug load
 
-# User configuration
+# common
 export EDITOR='vim'
 export TERM=xterm-256color
+
+# cd -
 setopt AUTOPUSHD
 
-#set history size
+# history
+# set history size
 export HISTSIZE=10000
-#save history after logout
+# save history after logout
 export SAVEHIST=10000
-#history file
+# history file
 export HISTFILE=~/.zsh_history
-#append into history file
+# append into history file
 setopt INC_APPEND_HISTORY
 #save only one command if 2 common are same and consistent
 setopt HIST_IGNORE_DUPS
 
 # make search up and down work, so partially type and hit up/down to find relevant stuff
+# todo: refresh zsh-syntax-highlighting
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
@@ -67,9 +66,10 @@ export ZSHZ_CASE=smart
 # smart-case completion
 zstyle ':completion:*'  matcher-list 'm:{a-z}={A-Z}'
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# p10k configuration
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# alias
 # use neovim
 alias 'vim'='nvim'
 
