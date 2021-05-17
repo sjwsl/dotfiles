@@ -22,18 +22,19 @@ function mac_init() {
 	fi
 
 	brew update
-  brew install python3
-  brew install npm
-  brew install yarn
-  brew install node
-  brew install rsync
-  brew install curl
-  brew install zsh
 	brew install coreutils
 	brew install git
 	brew install neovim
 	brew install tmux
+  brew install cmake
+  brew install curl
   brew install fzf
+  brew install node
+  brew install npm
+  brew install python3
+  brew install rsync
+  brew install yarn
+  brew install zsh
 
   open ./Gruvbox.itermcolors
 }
@@ -48,22 +49,23 @@ function linux_init() {
 
   curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 
-  sudo apt install -y python
-  sudo apt install -y pip
-  sudo apt install -y global
-  sudo apt install -y npm
-  sudo apt install -y yarn
-  sudo apt install -y nodejs
-  sudo apt install -y rsync
-  sudo apt install -y curl
-  sudo apt install -y zsh
+  sudo apt install -y cmake
   sudo apt install -y coreutils
+  sudo apt install -y curl
   sudo apt install -y git
+  sudo apt install -y global
   sudo apt install -y neovim
+  sudo apt install -y nodejs
+  sudo apt install -y npm
+  sudo apt install -y pip
+  sudo apt install -y python
+  sudo apt install -y rsync
   sudo apt install -y tmux
-  sudo apt-get install -y ripgrep
-  sudo apt-get install -y locales
+  sudo apt install -y yarn
+  sudo apt install -y zsh
   sudo apt-get install -y fzf
+  sudo apt-get install -y locales
+  sudo apt-get install -y ripgrep
 
   sudo locale-gen en_US.UTF-8 
   sudo locale-gen zh_CN.UTF-8
