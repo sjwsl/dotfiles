@@ -26,7 +26,7 @@ if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
-" change cursor shape in different modes
+" cursor shapes
 let &t_SI = "\<esc>[6 q"
 let &t_SR = "\<esc>[6 q"
 let &t_EI = "\<esc>[2 q"
@@ -51,9 +51,15 @@ set ttimeoutlen=5
 set pumheight=10
 set laststatus=2
 set maxmempattern=2000000
-" set clipboard^=unnamed,unnamedplus
-set foldmethod=syntax
-set foldlevel=9999
+
+" fold
+augroup fold
+au!
+au BufReadPre * setlocal foldmethod=indent
+au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+au BufWinLeave * silent! mkview
+au BufWinEnter * silent! loadview
+augroup end
 
 " indent
 set autoindent
@@ -69,6 +75,7 @@ set ignorecase
 set smartcase
 set hlsearch
 
+" plugin configuration
 for f in split(glob('~/.vim/*.vim'), '\n')
     exe 'source' f
 endfor
