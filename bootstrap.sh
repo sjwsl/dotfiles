@@ -49,6 +49,7 @@ function linux_init() {
   curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 
   sudo apt install -y python
+  sudo apt install -y pip
   sudo apt install -y gtags
   sudo apt install -y npm
   sudo apt install -y yarn
@@ -64,8 +65,8 @@ function linux_init() {
   sudo apt-get install -y locales
   sudo apt-get install -y fzf
 
-  locale-gen en_US.UTF-8 
-  locale-gen zh_CN.UTF-8
+  sudo locale-gen en_US.UTF-8 
+  sudo locale-gen zh_CN.UTF-8
 
   # zplug
   rm -rf $HOME/.zplug
