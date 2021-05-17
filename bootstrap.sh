@@ -49,6 +49,7 @@ function linux_init() {
   curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 
   sudo apt install -y python
+  sudo apt install -y gtags
   sudo apt install -y npm
   sudo apt install -y yarn
   sudo apt install -y nodejs
