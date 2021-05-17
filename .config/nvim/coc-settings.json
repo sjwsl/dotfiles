@@ -1,5 +1,4 @@
 {
-	"python.linting.pylintEnabled": true,
   "python.jediEnabled": false,
 	"diagnostic.refreshOnInsertMode": true,
 	"tabnine.priority": 70 ,

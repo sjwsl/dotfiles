@@ -1,31 +1,20 @@
 call plug#begin('~/.vim/plugged')
-Plug 'honza/vim-snippets'
-Plug 'takac/vim-hardtime'
-Plug 'junegunn/vim-easy-align'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-" Plug 'Krasjet/auto.pairs'
-Plug 'scrooloose/nerdcommenter'
-Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 Plug 'easymotion/vim-easymotion'
-Plug 'lervag/vimtex'
-Plug 'wakatime/vim-wakatime'
-
-" theme
-Plug 'morhetz/gruvbox'
-Plug 'vim-airline/vim-airline'
-
-" git
-Plug 'tpope/vim-fugitive'
-Plug 'mhinz/vim-signify'
-Plug 'junegunn/gv.vim'
-
-" c++
-Plug 'majutsushi/tagbar'
+Plug 'honza/vim-snippets'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
-
+Plug 'junegunn/gv.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'mhinz/vim-signify'
+Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-let g:coc_global_extensions = ['coc-tabnine', 'coc-snippets', 'coc-vimtex', 'coc-json', 'coc-cmake', 'coc-pyright', 'coc-clang-format-style-options', 'coc-python']
+Plug 'scrooloose/nerdcommenter'
+Plug 'takac/vim-hardtime'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'wakatime/vim-wakatime'
+Plug 'Yggdroot/LeaderF'
+let g:coc_global_extensions = ['coc-tabnine', 'coc-snippets', 'coc-json', 'coc-clang-format-style-options', 'coc-python']
 call plug#end()
 
 " theme
