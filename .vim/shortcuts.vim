@@ -61,10 +61,7 @@ function! s:show_documentation()
   endif
 endfunction
 
-" tagbar
-noremap <leader>t :TagbarToggle<CR>
-
-" NERDTree
+" Netrw
 noremap <leader>d :edit .<CR>
 
 " Leaderf
@@ -89,4 +86,3 @@ noremap <leader>7 7gt
 noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
-
