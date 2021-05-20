@@ -2,7 +2,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'easymotion/vim-easymotion'
 Plug 'honza/vim-snippets'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
-Plug 'junegunn/gv.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'mhinz/vim-signify'
 Plug 'morhetz/gruvbox'
