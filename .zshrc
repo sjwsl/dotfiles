@@ -19,10 +19,10 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting"
 
 if ! zplug check; then
-    printf "Install zsh plugins? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
+  printf "Install zsh plugins? [y/N]: "
+  if read -q; then
+    echo; zplug install
+  fi
 fi
 
 zplug load
@@ -76,9 +76,9 @@ alias .....="cd ../../../.."
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
-	colorflag="--color"
+  colorflag="--color"
 else # macOS `ls`
-	colorflag="-G"
+  colorflag="-G"
 fi
 
 # List all files colorized in long format, excluding . and ..
@@ -100,13 +100,13 @@ bindkey '^[[B' down-line-or-beginning-search
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('$HOME/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
+  eval "$__conda_setup"
 else
-    if [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="$HOME/anaconda3/bin:$PATH"
-    fi
+  if [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]; then
+    . "$HOME/anaconda3/etc/profile.d/conda.sh"
+  else
+    export PATH="$HOME/anaconda3/bin:$PATH"
+  fi
 fi
 unset __conda_setup
 

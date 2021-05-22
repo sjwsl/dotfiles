@@ -1,15 +1,15 @@
 #!/usr/bin/env zsh
 
 function sync() {
-	rsync --exclude ".git/" \
-			--exclude ".DS_Store" \
-			--exclude "bootstrap.sh" \
-			--exclude "README.md" \
-      --exclude "LICENSE" \
-      --exclude "Gruvbox.itermcolors" \
-			-avh --no-perms . ~
-  
-	tmux source-file ~/.tmux.conf 
+  rsync --exclude ".git/" \
+    --exclude ".DS_Store" \
+    --exclude "bootstrap.sh" \
+    --exclude "README.md" \
+    --exclude "LICENSE" \
+    --exclude "Gruvbox.itermcolors" \
+    -avh --no-perms . ~
+
+  tmux source-file ~/.tmux.conf
 
   nvim -c 'PlugInstall|CocInstall|qa'
 
@@ -17,15 +17,15 @@ function sync() {
 }
 
 function mac_init() {
-	if ! [ -x "$(command -v brew)" ]; then
-		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-	fi
+  if ! [ -x "$(command -v brew)" ]; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
 
-	brew update
-	brew install coreutils
-	brew install git
-	brew install neovim
-	brew install tmux
+  brew update
+  brew install coreutils
+  brew install git
+  brew install neovim
+  brew install tmux
   brew install cmake
   brew install curl
   brew install fzf
@@ -67,7 +67,7 @@ function linux_init() {
   sudo apt-get install -y locales
   sudo apt-get install -y ripgrep
 
-  sudo locale-gen en_US.UTF-8 
+  sudo locale-gen en_US.UTF-8
   sudo locale-gen zh_CN.UTF-8
 
   # zplug
@@ -91,7 +91,7 @@ function init() {
 }
 
 if [ "$1" = "--init" ] || [ "$1" = "-i" ]; then
-	init
+  init
 fi
 
 sync
