@@ -36,17 +36,24 @@ let &t_SR = "\<esc>[6 q"
 language en_US.UTF-8
 filetype plugin indent on
 autocmd FileType latex,tex,md,markdown setlocal spell | setlocal spelllang=en_us,cjk
+set cmdheight=2
 set cursorline
+set encoding=utf-8
+set hidden
 set laststatus=2
 set lazyredraw
 set maxmempattern=2000000
 set mouse=a
+set nobackup
 set noerrorbells
 set noswapfile 
+set nowritebackup
 set number
 set pumheight=10
 set relativenumber
+set shortmess+=c
 set showmatch
+set signcolumn=number
 set splitright
 set timeoutlen=1000
 set ttimeoutlen=5
