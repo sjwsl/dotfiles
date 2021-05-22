@@ -1,4 +1,5 @@
 call plug#begin('~/.vim/plugged')
+Plug 'Yggdroot/LeaderF'
 Plug 'easymotion/vim-easymotion'
 Plug 'honza/vim-snippets'
 Plug 'jackguo380/vim-lsp-cxx-highlight'
@@ -13,7 +14,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'wakatime/vim-wakatime'
-Plug 'Yggdroot/LeaderF'
 let g:coc_global_extensions = ['coc-vimtex', 'coc-cmake', 'coc-tabnine', 'coc-snippets', 'coc-json', 'coc-clang-format-style-options', 'coc-python']
 call plug#end()
 
@@ -27,30 +27,30 @@ if (has("nvim"))
 endif
 
 " cursor shapes
+let &t_EI = "\<esc>[2 q"
 let &t_SI = "\<esc>[6 q"
 let &t_SR = "\<esc>[6 q"
-let &t_EI = "\<esc>[2 q"
 
 " common
 language en_US.UTF-8
 filetype plugin indent on
 autocmd FileType latex,tex,md,markdown setlocal spell | setlocal spelllang=en_us,cjk
-set noswapfile 
-set updatetime=100
+set cursorline
+set laststatus=2
+set lazyredraw
+set maxmempattern=2000000
 set mouse=a
 set noerrorbells
+set noswapfile 
 set number
+set pumheight=10
 set relativenumber
-set cursorline
-set wildmenu
 set showmatch
 set splitright
-set lazyredraw
 set timeoutlen=1000
 set ttimeoutlen=5
-set pumheight=10
-set laststatus=2
-set maxmempattern=2000000
+set updatetime=100
+set wildmenu
 
 " fold
 augroup fold
@@ -63,17 +63,17 @@ augroup end
 
 " indent
 set autoindent
-set shiftwidth=2
-set tabstop=2
-set softtabstop=2
-set expandtab
 set backspace=2
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
 
 " search
-set incsearch
-set ignorecase
-set smartcase
 set hlsearch
+set ignorecase
+set incsearch
+set smartcase
 
 " plugin configuration
 for f in split(glob('~/.vim/*.vim'), '\n')

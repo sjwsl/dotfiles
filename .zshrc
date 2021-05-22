@@ -13,10 +13,10 @@ fi
 source $ZPLUG_HOME/init.zsh
 
 zplug "agkozak/zsh-z"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-syntax-highlighting"
 zplug "romkatv/powerlevel10k", as:theme, depth:1
 zplug "sobolevn/wakatime-zsh-plugin"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-syntax-highlighting"
 
 if ! zplug check; then
     printf "Install zsh plugins? [y/N]: "
