@@ -61,6 +61,9 @@ function! s:show_documentation()
   endif
 endfunction
 
+" Format
+nnoremap <leader>l :Autoformat<CR>
+
 " Netrw
 noremap <leader>d :edit .<CR>
 
