@@ -2,7 +2,7 @@ let mapleader=" "
 inoremap jk <ESC>
 inoremap kj <ESC>
 inoremap <ESC> <NOP>
-nnoremap <leader>h :nohlsearch<CR>
+nnoremap <leader>h <silent> :nohlsearch<CR>
 nnoremap cp "+y
 xnoremap cp "+y
 nnoremap n nzz
@@ -13,10 +13,10 @@ nnoremap g* g*zz
 nnoremap g# g#zz
 nnoremap <C-O> <C-O>zz
 nnoremap <C-I> <C-I>zz
-nnoremap <C-W>\| :vsplit<CR>
-nnoremap <C-W>_ :split<CR>
+nnoremap <C-W>\| <silent> :vsplit<CR>
+nnoremap <C-W>_ <silent> :split<CR>
 
-nnoremap <tab> @=(foldlevel('.')?'za':"\<tab>")<CR>
+nnoremap <tab> <silent> @=(foldlevel('.')?'za':"\<tab>")<CR>
 
 " Zoom / Restore window.
 function! s:ZoomToggle() abort
@@ -38,23 +38,23 @@ cnoremap <up> <C-P>
 cnoremap <down> <C-N>
 
 " easyalign
-xnoremap ga <Plug>(EasyAlign)
-nnoremap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 " easymotion
-nnoremap s <Plug>(easymotion-bd-f)
-nnoremap <Leader>w <Plug>(easymotion-bd-w)
+nmap s <Plug>(easymotion-bd-f)
+nmap <Leader>w <Plug>(easymotion-bd-w)
 
 " coc
-nnoremap [g <Plug>(coc-diagnostic-prev)
-nnoremap ]g <Plug>(coc-diagnostic-next)
-nnoremap <C-W>gd :vsp<CR><Plug>(coc-definition)
-nnoremap gd <Plug>(coc-definition)
-nnoremap gr <Plug>(coc-references)
-nnoremap rn <Plug>(coc-rename)
+nmap [g <Plug>(coc-diagnostic-prev)
+nmap ]g <Plug>(coc-diagnostic-next)
+nmap <C-W>gd :vsp<CR><Plug>(coc-definition)
+nmap gd <Plug>(coc-definition)
+nmap gr <Plug>(coc-references)
+nmap rn <Plug>(coc-rename)
 
 " Use K to show documentation in preview window.
-nnoremap K :call <SID>show_documentation()<CR>
+nmap K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
