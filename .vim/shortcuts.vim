@@ -11,8 +11,12 @@ nnoremap * *zz
 nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
+nnoremap <C-O> <C-O>zz
+nnoremap <C-I> <C-I>zz
 nnoremap <C-W>\| :vsplit<CR>
 nnoremap <C-W>_ :split<CR>
+
+nnoremap <tab> @=(foldlevel('.')?'za':"\<tab>")<CR>
 
 " Zoom / Restore window.
 function! s:ZoomToggle() abort
@@ -27,30 +31,30 @@ function! s:ZoomToggle() abort
   endif
 endfunction
 command! ZoomToggle call s:ZoomToggle()
-nnoremap <silent> <C-W>z :ZoomToggle<CR>
+nnoremap <C-W>z :ZoomToggle<CR>
 
 " navigate in completion box
 cnoremap <up> <C-P>
 cnoremap <down> <C-N>
 
 " easyalign
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
+xnoremap ga <Plug>(EasyAlign)
+nnoremap ga <Plug>(EasyAlign)
 
 " easymotion
-nmap s <Plug>(easymotion-bd-f)
-map <Leader>w <Plug>(easymotion-bd-w)
+nnoremap s <Plug>(easymotion-bd-f)
+nnoremap <Leader>w <Plug>(easymotion-bd-w)
 
 " coc
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-nmap <silent> <C-W>gd :vsp<CR><Plug>(coc-definition)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> rn <Plug>(coc-rename)
+nnoremap [g <Plug>(coc-diagnostic-prev)
+nnoremap ]g <Plug>(coc-diagnostic-next)
+nnoremap <C-W>gd :vsp<CR><Plug>(coc-definition)
+nnoremap gd <Plug>(coc-definition)
+nnoremap gr <Plug>(coc-references)
+nnoremap rn <Plug>(coc-rename)
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
