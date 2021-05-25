@@ -53,6 +53,9 @@ autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 
+# homebrew completion
+FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+
 # zsh-z
 autoload -U compinit && compinit
 zstyle ':completion:*' menu select
