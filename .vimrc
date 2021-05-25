@@ -53,7 +53,6 @@ set pumheight=10
 set relativenumber
 set shortmess+=c
 set showmatch
-set signcolumn=number
 set splitright
 set timeoutlen=1000
 set ttimeoutlen=5
