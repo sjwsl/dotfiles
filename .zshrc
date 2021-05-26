@@ -94,8 +94,6 @@ alias ld="ls -lhF ${colorflag} | grep --color=never '^d'"
 
 # bindkey
 bindkey -v
-bindkey '^R' history-incremental-pattern-search-backward
-bindkey '^F' history-incremental-pattern-search-forward
 bindkey "$key[Up]" up-line-or-beginning-search
 bindkey "$key[Down]" down-line-or-beginning-search
 # todo: OSX $key and $terminfo values are both wrong, so hardcode
