@@ -10,7 +10,9 @@ This is my personal Unix dotfiles including
 
 Tested on
 - macOS Big Sur
-- Ubuntu 20.04 LTS
+- Ubuntu 20.04 
+
+Should work on recent releases of macOS and Ubuntu.
 
 ## Installation
 
@@ -20,8 +22,27 @@ cd dotfiles
 zsh ./bootstrap.sh --init
 ```
 
-## Dependencies
+## Customization
 
-- [zplug](https://github.com/zplug/zplug) for managing zsh plugins
-- [vim-plug](https://github.com/junegunn/vim-plug) for managing vim plugins
-- [tpm](https://github.com/tmux-plugins/tpm) for managing tmux plugins
+Change the configuration in `dotfiles` then
+
+```zsh
+./bootstrap.sh
+```
+
+to apply the changes without initialization.
+
+## Main features
+
+- Full set of [gruvbox-dark](https://github.com/morhetz/gruvbox) theme (iTerm2, zsh, tmux, vim)
+- Minimal Zsh configuration with some useful tools installed
+- More comfortable tmux key bindings
+- Simple vim configuration with powerful C++ support and basic Python support (thanks to the awesome plugins)
+
+## Thanks to
+
+- [zplug](https://github.com/zplug/zplug)
+- [vim-plug](https://github.com/junegunn/vim-plug)
+- [tpm](https://github.com/tmux-plugins/tpm)
+- [gruvbox](https://github.com/morhetz/gruvbox)
+- [coc.nvim](https://github.com/neoclide/coc.nvim)
