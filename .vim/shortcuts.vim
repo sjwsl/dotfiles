@@ -16,8 +16,6 @@ nnoremap <C-I> <C-I>zz
 nnoremap <C-W>\| <silent> :vsplit<CR>
 nnoremap <C-W>_ <silent> :split<CR>
 
-nnoremap <tab> <silent> @=(foldlevel('.')?'za':"\<tab>")<CR>
-
 " Zoom / Restore window.
 function! s:ZoomToggle() abort
   if exists('t:zoomed') && t:zoomed
