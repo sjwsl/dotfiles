@@ -89,6 +89,9 @@ alias ll="ls -lhF ${colorflag}"
 # List only directories
 alias ld="ls -lhF ${colorflag} | grep --color=never '^d'"
 
+# fzf key bindings and fuzzy completion
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # bindkey
 bindkey -v
 bindkey '^R' history-incremental-pattern-search-backward
