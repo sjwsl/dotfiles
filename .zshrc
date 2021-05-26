@@ -89,6 +89,9 @@ alias ll="ls -lhF ${colorflag}"
 # List only directories
 alias ld="ls -lhF ${colorflag} | grep --color=never '^d'"
 
+# https://unix.stackexchange.com/questions/141367/have-xargs-use-alias-instead-of-binary
+alias xargs="xargs "
+
 # fzf key bindings and fuzzy completion
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
