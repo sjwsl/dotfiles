@@ -2,6 +2,9 @@ let mapleader=" "
 inoremap jk <ESC>
 inoremap kj <ESC>
 inoremap <ESC> <NOP>
+nmap Q <NOP>
+nmap <left> <NOP>
+nmap <right> <NOP>
 nnoremap <leader>h <silent> :nohlsearch<CR>
 nnoremap cp "+y
 xnoremap cp "+y
