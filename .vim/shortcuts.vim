@@ -3,8 +3,14 @@ inoremap jk <ESC>
 inoremap kj <ESC>
 inoremap <ESC> <NOP>
 nmap Q <NOP>
-nmap <left> <NOP>
-nmap <right> <NOP>
+nnoremap <left> <NOP>
+nnoremap <right> <NOP>
+nnoremap <up> <NOP>
+nnoremap <down> <NOP>
+inoremap <left> <NOP>
+inoremap <right> <NOP>
+inoremap <up> <NOP>
+inoremap <down> <NOP>
 nnoremap <leader>h <silent> :nohlsearch<CR>
 nnoremap cp "+y
 xnoremap cp "+y
