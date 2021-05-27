@@ -45,7 +45,7 @@ set maxmempattern=2000000
 set mouse=a
 set nobackup
 set noerrorbells
-set noswapfile 
+set noswapfile
 set nowritebackup
 set number
 set pumheight=10
@@ -60,16 +60,16 @@ set wildmenu
 
 " fold
 augroup fold
-au!
-au BufReadPre * setlocal foldmethod=indent
-au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
-au BufWinLeave * silent! mkview
-au BufWinEnter * silent! loadview
+  au!
+  au BufReadPre * setlocal foldmethod=indent
+  au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
+  au BufWinLeave * silent! mkview
+  au BufWinEnter * silent! loadview
 augroup end
 
 " indent
 set autoindent
-set backspace=2
+set backspace=indent,eol,start
 set expandtab
 set shiftwidth=2
 set softtabstop=2
@@ -83,5 +83,5 @@ set smartcase
 
 " plugin configuration
 for f in split(glob('~/.vim/*.vim'), '\n')
-    exe 'source' f
+  exe 'source' f
 endfor
