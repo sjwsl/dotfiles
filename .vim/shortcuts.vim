@@ -11,7 +11,7 @@ inoremap <left> <NOP>
 inoremap <right> <NOP>
 inoremap <up> <NOP>
 inoremap <down> <NOP>
-nnoremap <leader>h <silent> :nohlsearch<CR>
+nnoremap <silent> <leader>h :nohlsearch<CR>
 nnoremap cp "+y
 xnoremap cp "+y
 nnoremap n nzz
@@ -22,8 +22,8 @@ nnoremap g* g*zz
 nnoremap g# g#zz
 nnoremap <C-O> <C-O>zz
 nnoremap <C-I> <C-I>zz
-nnoremap <C-W>\| <silent> :vsplit<CR>
-nnoremap <C-W>_ <silent> :split<CR>
+nnoremap <silent> <C-W>\| :vsplit<CR>
+nnoremap <silent> <C-W>_ :split<CR>
 
 " Zoom / Restore window.
 function! s:ZoomToggle() abort
