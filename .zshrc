@@ -65,9 +65,8 @@ export ZSHZ_CASE=smart
 zstyle ':completion:*'  matcher-list 'm:{a-z}={A-Z}'
 
 # p10k configuration
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
-# alias
 # use neovim
 alias 'vim'='nvim'
 
@@ -93,7 +92,7 @@ alias ld="ls -lhF ${colorflag} | grep --color=never '^d'"
 alias xargs="xargs "
 
 # fzf key bindings and fuzzy completion
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 
 # bindkey
 bindkey -v
@@ -103,19 +102,5 @@ bindkey "$key[Down]" down-line-or-beginning-search
 bindkey '^[[A' up-line-or-beginning-search
 bindkey '^[[B' down-line-or-beginning-search
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('$HOME/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-  eval "$__conda_setup"
-else
-  if [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]; then
-    . "$HOME/anaconda3/etc/profile.d/conda.sh"
-  else
-    export PATH="$HOME/anaconda3/bin:$PATH"
-  fi
-fi
-unset __conda_setup
-
-export PATH="$HOME/anaconda3/bin/:$PATH"
-# <<< conda initialize <<<
+# local config
+[[ -f $HOME/.local/.zshrc.local ]] && source $HOME/.local/.zshrc.local
