@@ -41,8 +41,8 @@ command! ZoomToggle call s:ZoomToggle()
 nnoremap <C-W>z :ZoomToggle<CR>
 
 " navigate in completion box
-cnoremap <up> <C-P>
-cnoremap <down> <C-N>
+cnoremap <up> <C-K>
+cnoremap <down> <C-J>
 
 " easyalign
 xmap ga <Plug>(EasyAlign)
@@ -61,7 +61,7 @@ nmap gr <Plug>(coc-references)
 nmap rn <Plug>(coc-rename)
 
 " Use K to show documentation in preview window.
-nmap K :call <SID>show_documentation()<CR>
+nmap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
@@ -76,18 +76,18 @@ endfunction
 nnoremap <leader>l :Autoformat<CR>
 
 " Netrw
-noremap <leader>d :edit .<CR>
+noremap <leader>e :edit .<CR>
 
 " Leaderf
-nnoremap <leader>s :<C-U><C-R>=printf("Leaderf rg -F -e %s", expand("<cword>"))<CR><CR>
-xnoremap <leader>s :<C-U><C-R>=printf("Leaderf rg -F -e %s", leaderf#Rg#visual())<CR><CR>
-noremap <leader>p :Leaderf rg -F<CR>
-noremap <leader>r :<C-U><C-R>=printf("Leaderf gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
-noremap <leader>R :<C-U><C-R>=printf("Leaderf gtags -s %s --auto-jump", expand("<cword>"))<CR><CR>
-noremap <leader>c :<C-U><C-R>=printf("Leaderf gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
-noremap <leader>g :Leaderf gtags<CR>
-noremap <leader>m :Leaderf mru<CR>
-noremap <leader>f :Leaderf file<CR>
+nnoremap <silent> <leader>s :<C-U><C-R>=printf("Leaderf rg -F -e %s", expand("<cword>"))<CR><CR>
+xnoremap <silent> <leader>s :<C-U><C-R>=printf("Leaderf rg -F -e %s", leaderf#Rg#visual())<CR><CR>
+noremap <silent> <leader>p :Leaderf rg -F<CR>
+noremap <silent> <leader>r :<C-U><C-R>=printf("Leaderf gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
+noremap <silent> <leader>R :<C-U><C-R>=printf("Leaderf gtags -s %s --auto-jump", expand("<cword>"))<CR><CR>
+noremap <silent> <leader>d :<C-U><C-R>=printf("Leaderf gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+noremap <silent> <leader>g :Leaderf gtags<CR>
+noremap <silent> <leader>m :Leaderf mru<CR>
+noremap <silent> <leader>f :Leaderf file<CR>
 
 " tab
 noremap <leader>1 1gt
