@@ -11,7 +11,6 @@ inoremap <left> <NOP>
 inoremap <right> <NOP>
 inoremap <up> <NOP>
 inoremap <down> <NOP>
-nnoremap <silent> <leader>h :nohlsearch<CR>
 nnoremap cp "+y
 xnoremap cp "+y
 nnoremap n nzz
@@ -38,23 +37,23 @@ function! s:ZoomToggle() abort
   endif
 endfunction
 command! ZoomToggle call s:ZoomToggle()
-nnoremap <C-W>z :ZoomToggle<CR>
+nnoremap <silent> <C-W>z :ZoomToggle<CR>
 
 " easyalign
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
+xmap <silent> ga <Plug>(EasyAlign)
+nmap <silent> ga <Plug>(EasyAlign)
 
 " easymotion
-nmap s <Plug>(easymotion-bd-f)
-nmap <Leader>w <Plug>(easymotion-bd-w)
+nmap <silent> s <Plug>(easymotion-bd-f)
+nmap <silent> <Leader>w <Plug>(easymotion-bd-w)
 
 " coc
-nmap [g <Plug>(coc-diagnostic-prev)
-nmap ]g <Plug>(coc-diagnostic-next)
-nmap <C-W>gd :vsp<CR><Plug>(coc-definition)
-nmap gd <Plug>(coc-definition)
-nmap gr <Plug>(coc-references)
-nmap rn <Plug>(coc-rename)
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> <C-W>gd :vsp<CR><Plug>(coc-definition)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> rn <Plug>(coc-rename)
 
 " Use K to show documentation in preview window.
 nmap <silent> K :call <SID>show_documentation()<CR>
@@ -68,11 +67,9 @@ function! s:show_documentation()
   endif
 endfunction
 
-" format
-nnoremap <leader>l :Autoformat<CR>
-
-" Netrw
-noremap <leader>e :edit .<CR>
+nnoremap <silent> <leader>l :Autoformat<CR>
+noremap <silent> <leader>e :edit .<CR>
+nnoremap <silent> <leader>h :nohlsearch<CR>
 
 " Leaderf
 nnoremap <silent> <leader>s :<C-U><C-R>=printf("Leaderf rg -F -e %s", expand("<cword>"))<CR><CR>
@@ -84,6 +81,7 @@ noremap <silent> <leader>d :<C-U><C-R>=printf("Leaderf gtags -d %s --auto-jump",
 noremap <silent> <leader>g :Leaderf gtags<CR>
 noremap <silent> <leader>m :Leaderf mru<CR>
 noremap <silent> <leader>f :Leaderf file<CR>
+noremap <silent> <leader>b :Leaderf buffer<CR>
 
 " tab
 noremap <leader>1 1gt
