@@ -4,6 +4,7 @@ let g:Lf_PythonVersion = 3
 let g:Lf_Gtagslabel = 'native-pygments'
 let g:Lf_RgConfig = [
       \ "--hidden", 
+      \ "--max-columns=150",
       \ "--no-ignore"
 				\ ]
 let g:Lf_ExternalCommand = 'rg --files --no-ignore --hidden "%s"'
