@@ -9,7 +9,11 @@
   editor = nvim
 [diff]
   tool = nvimdiff
+[merge]
+  tool = nvimdiff
 [difftool]
+  prompt = false
+[mergetool]
   prompt = false
 [include]
   path = ~/.local/.gitconfig.local
