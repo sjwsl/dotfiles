@@ -40,10 +40,6 @@ endfunction
 command! ZoomToggle call s:ZoomToggle()
 nnoremap <C-W>z :ZoomToggle<CR>
 
-" navigate in completion box
-cnoremap <up> <C-K>
-cnoremap <down> <C-J>
-
 " easyalign
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
