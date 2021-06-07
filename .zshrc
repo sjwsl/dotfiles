@@ -17,6 +17,7 @@ zplug "romkatv/powerlevel10k", as:theme, depth:1
 zplug "sobolevn/wakatime-zsh-plugin"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting"
+zplug "jeffreytse/zsh-vi-mode"
 
 if ! zplug check; then
   printf "Install zsh plugins? [y/N]: "
@@ -28,8 +29,9 @@ fi
 zplug load
 
 # common
-export EDITOR='vim'
+export EDITOR='nvim'
 export TERM=xterm-256color
+KEYTIMEOUT=1
 
 # cd -
 setopt AUTOPUSHD
@@ -91,9 +93,6 @@ alias ld="ls -lhF ${colorflag} | grep --color=never '^d'"
 # https://unix.stackexchange.com/questions/141367/have-xargs-use-alias-instead-of-binary
 alias xargs="xargs "
 
-# fzf key bindings and fuzzy completion
-[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
-
 # bindkey
 bindkey -v
 bindkey "$key[Up]" up-line-or-beginning-search
@@ -101,6 +100,11 @@ bindkey "$key[Down]" down-line-or-beginning-search
 # todo: OSX $key and $terminfo values are both wrong, so hardcode
 bindkey '^[[A' up-line-or-beginning-search
 bindkey '^[[B' down-line-or-beginning-search
+
+export ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+
+# fzf key bindings and fuzzy completion
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 
 # local config
 [[ -f $HOME/.local/.zshrc.local ]] && source $HOME/.local/.zshrc.local
