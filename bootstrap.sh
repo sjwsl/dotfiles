@@ -35,6 +35,8 @@ function mac_init() {
   brew install rsync
   brew install yarn
   brew install zsh
+  brew install ripgrep
+  brew install fd
 
   open ./Gruvbox.itermcolors
 }
@@ -63,6 +65,7 @@ function linux_init() {
   sudo apt install -y tmux
   sudo apt install -y yarn
   sudo apt install -y zsh
+  sudo apt install -y fd-find
   sudo apt-get install -y fzf
   sudo apt-get install -y locales
   sudo apt-get install -y ripgrep
