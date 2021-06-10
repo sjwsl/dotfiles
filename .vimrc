@@ -15,6 +15,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'wakatime/vim-wakatime'
+Plug 'octol/vim-cpp-enhanced-highlight'
 let g:coc_global_extensions = ['coc-clangd', 'coc-vimtex', 'coc-cmake', 'coc-tabnine', 'coc-snippets', 'coc-json', 'coc-clang-format-style-options', 'coc-python']
 call plug#end()
 
