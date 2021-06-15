@@ -104,7 +104,7 @@ bindkey '^[[B' down-line-or-beginning-search
 export ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
 
 # fzf key bindings and fuzzy completion
-[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
+zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
 
 # local config
 [[ -f $HOME/.local/.zshrc.local ]] && source $HOME/.local/.zshrc.local
