@@ -1,6 +1,6 @@
 {
+  "suggest.triggerCompletionWait": 500,
   "python.jediEnabled": false,
-  "diagnostic.refreshOnInsertMode": true,
   "tabnine.priority": 70,
   "clangd.semanticHighlighting": true
 }
