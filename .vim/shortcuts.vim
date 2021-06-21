@@ -83,18 +83,6 @@ noremap <silent> <leader>m :Leaderf mru<CR>
 noremap <silent> <leader>f :Leaderf file<CR>
 noremap <silent> <leader>b :Leaderf buffer<CR>
 
-" tab
-noremap <leader>1 1gt
-noremap <leader>2 2gt
-noremap <leader>3 3gt
-noremap <leader>4 4gt
-noremap <leader>5 5gt
-noremap <leader>6 6gt
-noremap <leader>7 7gt
-noremap <leader>8 8gt
-noremap <leader>9 9gt
-noremap <leader>0 :tablast<cr>
-
 inoremap {; {<CR>};<ESC>O
 inoremap {, {<CR>},<ESC>O
 inoremap {{ {<CR>}<ESC>O
