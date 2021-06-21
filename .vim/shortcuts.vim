@@ -40,8 +40,8 @@ command! ZoomToggle call s:ZoomToggle()
 nnoremap <silent> <C-W>z :ZoomToggle<CR>
 
 " easyalign
-xmap <silent> ga <Plug>(EasyAlign)
-nmap <silent> ga <Plug>(EasyAlign)
+xmap <silent> <leader>a <Plug>(EasyAlign)
+nmap <silent> <leader>a <Plug>(EasyAlign)
 
 " easymotion
 nmap <silent> s <Plug>(easymotion-bd-f)
