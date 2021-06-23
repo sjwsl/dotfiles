@@ -27,7 +27,7 @@ This will install dependencies and copy configuration files to the right place.
 
 ## Customization
 
-Change the configuration in `dotfiles` then
+Modify the configuration in `dotfiles` then
 
 ```zsh
 ./bootstrap.sh
