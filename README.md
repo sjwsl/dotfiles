@@ -6,6 +6,7 @@ This is my personal Unix dotfiles including
 - zsh
 - tmux
 - neovim
+- git
 - ...
 
 Tested on
@@ -22,6 +23,8 @@ cd dotfiles
 zsh ./bootstrap.sh --init
 ```
 
+This will install dependencies and copy configuration files to the right place.
+
 ## Customization
 
 Change the configuration in `dotfiles` then
@@ -31,6 +34,8 @@ Change the configuration in `dotfiles` then
 ```
 
 to apply the changes without initialization.
+
+Or if you want local/experimental changes, create a corresponding file in `$HOME/.local/`. Currently only `.zsh.local` and `.gitconfig.local` are supported.
 
 ## Main features
 
@@ -54,3 +59,5 @@ to apply the changes without initialization.
 - [ ] Better compatibility
 - [ ] Fewer plugin dependencies (long term)
 - [ ] More concise vim configuration
+- [ ] Option for bootstrap to install extra tools
+- [ ] Support more local configuration
