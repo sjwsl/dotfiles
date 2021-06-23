@@ -1,3 +1,31 @@
+" common
+language en_US.UTF-8
+filetype plugin indent on
+autocmd FileType latex,tex,md,markdown setlocal spell | setlocal spelllang=en_us,cjk
+let mapleader=" "
+set cmdheight=2
+set cursorline
+set encoding=utf-8
+set hidden
+set laststatus=2
+set lazyredraw
+set maxmempattern=2000000
+set mouse=a
+set nobackup
+set noerrorbells
+set noswapfile
+set nowritebackup
+set number
+set pumheight=10
+set relativenumber
+set shortmess+=c
+set showmatch
+set splitright
+set timeoutlen=1000
+set ttimeoutlen=5
+set updatetime=100
+set wildmenu
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'Chiel92/vim-autoformat'
@@ -20,7 +48,7 @@ nmap <silent> s <Plug>(easymotion-bd-f)
 nmap <silent> <Leader>w <Plug>(easymotion-bd-w)
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
-let g:EasyMotion_do_mapping = 0 
+let g:EasyMotion_do_mapping = 0
 
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 let g:lsp_cxx_hl_use_text_props = 1
@@ -117,12 +145,12 @@ let g:NERDAltDelims_java = 1
 let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
-" Enable NERDCommenterToggle to check all selected lines is commented or not 
+" Enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
 
 Plug 'vim-airline/vim-airline'
 let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#scrollbar#enabled = 0 
+let g:airline#extensions#scrollbar#enabled = 0
 
 Plug 'octol/vim-cpp-enhanced-highlight'
 let g:cpp_class_scope_highlight = 1
@@ -154,34 +182,6 @@ endif
 let &t_EI = "\<esc>[2 q"
 let &t_SI = "\<esc>[6 q"
 let &t_SR = "\<esc>[6 q"
-
-" common
-language en_US.UTF-8
-filetype plugin indent on
-autocmd FileType latex,tex,md,markdown setlocal spell | setlocal spelllang=en_us,cjk
-let mapleader=" "
-set cmdheight=2
-set cursorline
-set encoding=utf-8
-set hidden
-set laststatus=2
-set lazyredraw
-set maxmempattern=2000000
-set mouse=a
-set nobackup
-set noerrorbells
-set noswapfile
-set nowritebackup
-set number
-set pumheight=10
-set relativenumber
-set shortmess+=c
-set showmatch
-set splitright
-set timeoutlen=1000
-set ttimeoutlen=5
-set updatetime=100
-set wildmenu
 
 " fold
 augroup fold
