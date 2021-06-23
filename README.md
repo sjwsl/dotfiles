@@ -10,7 +10,7 @@ This is my personal Unix dotfiles including
 
 Tested on
 - macOS Big Sur
-- Ubuntu 20.04 
+- Ubuntu 20.04 (except iTerm2 stuffs)
 
 Should work on recent releases of macOS and Ubuntu.
 
@@ -37,7 +37,7 @@ to apply the changes without initialization.
 - Full set of [gruvbox-dark](https://github.com/morhetz/gruvbox) theme (iTerm2, zsh, tmux, vim)
 - Minimal Zsh configuration with some useful tools installed
 - More comfortable tmux key bindings
-- Simple vim configuration with powerful C++ support and basic Python support (thanks to the awesome plugins)
+- Raletively simple vim configuration in one file with powerful C++ support and basic support for other languages (thanks to the awesome plugins)
 
 ## Thanks to
 
@@ -46,3 +46,11 @@ to apply the changes without initialization.
 - [tpm](https://github.com/tmux-plugins/tpm)
 - [gruvbox](https://github.com/morhetz/gruvbox)
 - [coc.nvim](https://github.com/neoclide/coc.nvim)
+
+## TODO
+
+- [x] All vim configuration in `.vimrc`
+- [ ] Platform-specific configurations (currently mainly focused on macOS)
+- [ ] Better compatibility
+- [ ] Fewer plugin dependencies (long term)
+- [ ] More concise vim configuration
