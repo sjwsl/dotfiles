@@ -11,7 +11,8 @@ function sync() {
 
   tmux source-file ~/.tmux.conf
 
-  nvim -c 'PlugInstall|CocInstall|qa'
+  nvim -c 'PlugInstall|qa'
+  nvim -c 'CocInstall|qa'
 
   zsh
 }
