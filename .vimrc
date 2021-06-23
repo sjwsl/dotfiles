@@ -205,7 +205,7 @@ set hlsearch
 set ignorecase
 set incsearch
 set smartcase
-nnoremap <silent> <leader>h :nohlsearch<CR>
+nnoremap <silent> <leader>h :set hlsearch!<CR>
 
 " netrw
 noremap <silent> <leader>e :edit .<CR>
