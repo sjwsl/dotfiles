@@ -166,6 +166,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'morhetz/gruvbox'
 Plug 'honza/vim-snippets'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 call plug#end()
 
@@ -205,7 +206,7 @@ set hlsearch
 set ignorecase
 set incsearch
 set smartcase
-nnoremap <silent> <leader>h :set hlsearch!<CR>
+nnoremap <silent><expr> <Leader>h (&hls && v:hlsearch ? ':nohls' : ':set hls')."\n"
 
 " netrw
 noremap <silent> <leader>e :edit .<CR>
