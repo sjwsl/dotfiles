@@ -56,7 +56,9 @@ zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 
 # homebrew completion
-FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+if [ "$(uname)" = "Darwin" ]; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
 
 # zsh-z
 autoload -U compinit && compinit
