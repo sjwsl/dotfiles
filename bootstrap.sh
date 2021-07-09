@@ -40,6 +40,9 @@ function mac_init() {
   brew install fd
 
   open ./Gruvbox.itermcolors
+
+  # To install useful key bindings and fuzzy completion:
+  $(brew --prefix)/opt/fzf/install
 }
 
 function linux_init() {
@@ -92,9 +95,6 @@ function init() {
 
   # tpm
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-  # To install useful key bindings and fuzzy completion:
-  $(brew --prefix)/opt/fzf/install
 }
 
 if [ "$1" = "--init" ] || [ "$1" = "-i" ]; then
