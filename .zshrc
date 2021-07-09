@@ -97,8 +97,8 @@ alias xargs="xargs "
 
 # bindkey
 bindkey -v
-bindkey "$key[Up]" up-line-or-beginning-search
-bindkey "$key[Down]" down-line-or-beginning-search
+# bindkey "^P" up-line-or-beginning-search
+# bindkey "^N" down-line-or-beginning-search
 # todo: OSX $key and $terminfo values are both wrong, so hardcode
 bindkey '^[[A' up-line-or-beginning-search
 bindkey '^[[B' down-line-or-beginning-search
@@ -107,6 +107,10 @@ export ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
 
 # fzf key bindings and fuzzy completion
 zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
+zvm_after_init_commands+=('source /usr/share/doc/fzf/examples/key-bindings.zsh')
+zvm_after_init_commands+=('source /usr/share/doc/fzf/examples/completion.zsh')
+zvm_after_init_commands+=('bindkey "^P" up-line-or-beginning-search')
+zvm_after_init_commands+=('bindkey "^N" down-line-or-beginning-search')
 
 # local config
 [[ -f $HOME/.local/.zshrc.local ]] && source $HOME/.local/.zshrc.local
