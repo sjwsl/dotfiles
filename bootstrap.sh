@@ -95,6 +95,10 @@ function init() {
 
   # tpm
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+  # wakatime
+  pip install wakatime
+  sudo ln -s $HOME/.local/bin/wakatime /usr/local/bin/wakatime
 }
 
 if [ "$1" = "--init" ] || [ "$1" = "-i" ]; then
