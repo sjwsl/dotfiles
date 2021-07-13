@@ -80,6 +80,9 @@ function linux_init() {
   # zplug
   rm -rf $HOME/.zplug
   git clone https://github.com/zplug/zplug $HOME/.zplug
+
+  # fd
+  ln -s $(which fdfind) ~/.local/bin/fd
 }
 
 function init() {
