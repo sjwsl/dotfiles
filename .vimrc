@@ -28,10 +28,25 @@ set wildmenu
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
 Plug 'Chiel92/vim-autoformat'
 nnoremap <silent> <leader>l :Autoformat<CR>
 
 Plug 'Yggdroot/LeaderF'
+let g:Lf_UseCache = 1
+let g:Lf_PythonVersion = 3
+let g:Lf_Gtagslabel = 'native-pygments'
+let g:Lf_RgConfig = [
+      \ "--hidden",
+      \ "--max-columns=150",
+      \ "--no-ignore"
+      \ ]
+let g:Lf_ExternalCommand = 'rg --files --no-ignore --hidden "%s"'
+let g:Lf_PreviewInPopup = 1
+let g:Lf_ShowHidden = 1
+let g:Lf_RootMarkers = ['.project']
 nnoremap <silent> <leader>s :<C-U><C-R>=printf("Leaderf rg -F -e %s", expand("<cword>"))<CR><CR>
 xnoremap <silent> <leader>s :<C-U><C-R>=printf("Leaderf rg -F -e %s", leaderf#Rg#visual())<CR><CR>
 noremap <silent> <leader>p :Leaderf rg -F<CR>
@@ -179,6 +194,9 @@ hi Normal guibg=none
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
+
+" https://vi.stackexchange.com/questions/11903/working-directory-different-than-current-file-directory
+set viewoptions-=curdir
 
 " cursor shapes
 let &t_EI = "\<esc>[2 q"
