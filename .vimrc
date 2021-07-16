@@ -91,7 +91,7 @@ Plug 'mhinz/vim-signify'
 let g:signify_sign_show_count = 1
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-let g:coc_global_extensions = ['coc-clangd', 'coc-vimtex', 'coc-cmake', 'coc-tabnine', 'coc-snippets', 'coc-json', 'coc-clang-format-style-options', 'coc-python']
+let g:coc_global_extensions = ['coc-clangd', 'coc-vimtex', 'coc-cmake', 'coc-tabnine', 'coc-snippets', 'coc-json', 'coc-python']
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <silent> <C-W>gd :vsp<CR><Plug>(coc-definition)
