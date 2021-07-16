@@ -176,6 +176,9 @@ Plug 'wakatime/vim-wakatime'
 
 call plug#end()
 
+set autoread                                                                                                                                                                                    
+au CursorHold * checktime  
+
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   highlight = {
@@ -215,8 +218,6 @@ augroup fold
   au!
   au BufReadPre * setlocal foldmethod=indent
   au BufWinEnter * if &fdm == 'indent' | setlocal foldmethod=manual | endif
-  au BufWinLeave * silent! mkview
-  au BufWinEnter * silent! loadview
 augroup end
 
 " indent
