@@ -65,9 +65,6 @@ let g:EasyMotion_smartcase = 1
 let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
 let g:EasyMotion_do_mapping = 0
 
-Plug 'jackguo380/vim-lsp-cxx-highlight'
-let g:lsp_cxx_hl_use_text_props = 1
-
 " for gruvbox
 hi! link Comment GruvboxGray
 hi! link Function GruvboxBlue
@@ -167,14 +164,7 @@ Plug 'vim-airline/vim-airline'
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#scrollbar#enabled = 0
 
-Plug 'octol/vim-cpp-enhanced-highlight'
-let g:cpp_class_scope_highlight = 1
-let g:cpp_member_variable_highlight = 1
-let g:cpp_class_decl_highlight = 1
-let g:cpp_posix_standard = 1
-let g:cpp_experimental_simple_template_highlight = 1
-let g:cpp_experimental_template_highlight = 1
-let g:cpp_concepts_highlight = 1
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
@@ -185,6 +175,23 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'wakatime/vim-wakatime'
 
 call plug#end()
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    custom_captures = {
+      -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
+      ["foo.bar"] = "Identifier",
+    },
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
+EOF
 
 " theme
 set background=dark
