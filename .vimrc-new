@@ -191,10 +191,6 @@ hi! link Number Constant
 hi! link Boolean Constant
 hi! link String Constant
 
-hi! link LspCxxHlGroupNamespace GruvboxOrange
-hi! link LspCxxHlGroupEnumConstant Constant
-hi! link LspCxxHlGroupMemberVariable GruvboxFg4
-
 " theme
 set background=dark
 colorscheme gruvbox
