@@ -11,10 +11,7 @@ function sync() {
 
   tmux source-file ~/.tmux.conf
 
-  nvim -c 'PlugInstall|qa'
-  nvim -c 'CocInstall|qa'
-
-  zsh
+  nvim -c 'PackerSync'
 }
 
 function mac_init() {
@@ -38,6 +35,7 @@ function mac_init() {
   brew install zsh
   brew install ripgrep
   brew install fd
+  brew install bat
 
   open ./Gruvbox.itermcolors
 
@@ -70,6 +68,7 @@ function linux_init() {
   sudo apt install -y yarn
   sudo apt install -y zsh
   sudo apt install -y fd-find
+  sudo apt install -y bat
   sudo apt-get install -y fzf
   sudo apt-get install -y locales
   sudo apt-get install -y ripgrep
@@ -92,9 +91,9 @@ function init() {
     linux_init
   fi
 
-  # vim-plug
-  sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  # packer.nvim
+  git clone https://github.com/wbthomason/packer.nvim\
+    ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
   # tpm
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
