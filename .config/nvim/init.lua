@@ -20,7 +20,6 @@ require('packer').startup(function()
   use 'Chiel92/vim-autoformat'
   use 'Junegunn/vim-easy-align'
   use 'mhinz/vim-signify'
-  use 'vim-airline/vim-airline'
   use 'nvim-treesitter/nvim-treesitter'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-repeat'
@@ -102,6 +101,7 @@ map('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', ns)
 map('n', 'gr', '<cmd>Telescope lsp_references<CR>', ns)
 map('n', 'gh', '<cmd>Lspsaga lsp_finder<CR>', ns)
 map('n', 'gs', '<cmd>Lspsaga signature_help<CR>', ns)
+map('n', 'K', '<cmd>Lspsaga hover_doc<CR>', ns)
 map('n', '<leader>q', '<cmd>Lspsaga code_action<CR>', ns)
 map('v', '<leader>q', '<cmd><C-U>Lspsaga range_code_action<CR>', ns)
 map('n', '<leader>rn', '<cmd>Lspsaga rename<CR>', ns)
