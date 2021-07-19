@@ -29,11 +29,12 @@ require('packer').startup(function()
   use 'neovim/nvim-lspconfig'
   use 'glepnir/lspsaga.nvim'
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  use 'wakatime/vim-wakatime'
 
 end)
 
 cmd 'colorscheme gruvbox'
-cmd 'hi! Normal guibg=none'          -- For diffrent background in inactive tmux pane
+cmd 'augroup tmux | au VimEnter * hi! Normal guibg=none | augroup END'          -- For diffrent background in inactive tmux pane
 g.mapleader = " "
 opt.completeopt = { 'menuone', 'noinsert', 'noselect' }  -- Completion options
 opt.expandtab = true                -- Use spaces instead of tabs
