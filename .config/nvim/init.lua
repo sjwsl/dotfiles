@@ -60,8 +60,6 @@ g['netrw_banner'] = 0
 g['netrw_liststyle'] = 3
 
 map('i', 'jk', '<esc>', ns)
-map('n', '<C-W>|', '<cmd>vsplit<CR>', ns)
-map('n', '<C-W>_', '<cmd>split<CR>', ns)
 map('', 'cp', '"+y', ns)
 map('n', '<leader>e', '<cmd>edit .<CR>', ns)
 
