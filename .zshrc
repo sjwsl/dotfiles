@@ -107,8 +107,6 @@ export ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
 
 # fzf key bindings and fuzzy completion
 zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
-zvm_after_init_commands+=('source /usr/share/doc/fzf/examples/key-bindings.zsh')
-zvm_after_init_commands+=('source /usr/share/doc/fzf/examples/completion.zsh')
 zvm_after_init_commands+=('bindkey "^P" up-line-or-beginning-search')
 zvm_after_init_commands+=('bindkey "^N" down-line-or-beginning-search')
 
