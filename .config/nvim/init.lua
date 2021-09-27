@@ -76,6 +76,8 @@ lsp.clangd.setup {
   cmd = { "clangd", "--background-index", "--clang-tidy" }
 }
 
+require'lspconfig'.pyright.setup{}
+
 require 'telescope'.setup(
 {
   defaults = {
@@ -103,8 +105,8 @@ map('n', 'K', '<cmd>Lspsaga hover_doc<CR>', ns)
 map('n', '<leader>q', '<cmd>Lspsaga code_action<CR>', ns)
 map('v', '<leader>q', '<cmd><C-U>Lspsaga range_code_action<CR>', ns)
 map('n', '<leader>rn', '<cmd>Lspsaga rename<CR>', ns)
-map('n', '[g', '<cmd>Lspsaga diagnostic_jump_next<CR>', ns)
-map('n', ']g', '<cmd>Lspsaga diagnostic_jump_prev<CR>', ns)
+map('n', '[g', '<cmd>Lspsaga diagnostic_jump_prev<CR>', ns)
+map('n', ']g', '<cmd>Lspsaga diagnostic_jump_next<CR>', ns)
 
 -- Find files using Telescope command-line sugar.
 map('n', '<leader>f', '<cmd>Telescope find_files<cr>', ns)
