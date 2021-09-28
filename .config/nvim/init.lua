@@ -16,7 +16,6 @@ require('packer').startup(function()
     requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } }
   }
 
-  use 'nvim-lua/completion-nvim'
   use 'Chiel92/vim-autoformat'
   use 'Junegunn/vim-easy-align'
   use 'mhinz/vim-signify'
@@ -60,11 +59,9 @@ g['netrw_banner'] = 0
 g['netrw_liststyle'] = 3
 
 map('i', 'jk', '<esc>', ns)
+map('i', '<C-N>', '<C-X><C-O>', ns)
 map('', 'cp', '"+y', ns)
 map('n', '<leader>e', '<cmd>edit .<CR>', ns)
-
-g['airline#extensions#whitespace#enabled'] = 0
-g['airline#extensions#scrolbar#enabled'] = 0
 
 require 'nvim-treesitter.configs'.setup {
   ensure_installed = 'maintained', highlight = { enable = true }
@@ -72,11 +69,39 @@ require 'nvim-treesitter.configs'.setup {
 
 local lsp = require 'lspconfig'
 
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  -- Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
+  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+end
+
 lsp.clangd.setup {
+  on_attach = on_attach,
   cmd = { "clangd", "--background-index", "--clang-tidy" }
 }
 
-require'lspconfig'.pyright.setup{}
+lsp.pyright.setup{
+  on_attach = on_attach
+}
 
 require 'telescope'.setup(
 {
@@ -94,19 +119,6 @@ require 'telescope'.setup(
 require('telescope').load_extension('fzf')
 
 g['completion_enable_auto_popup'] = 0
-map('i', '<tab>', '<plug>(completion_smart_tab)', s)
-map('i', '<s-tab>', '<plug>(completion_smart_s_tab)', s)
-
-map('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', ns)
-map('n', 'gr', '<cmd>Telescope lsp_references<CR>', ns)
-map('n', 'gh', '<cmd>Lspsaga lsp_finder<CR>', ns)
-map('n', 'gs', '<cmd>Lspsaga signature_help<CR>', ns)
-map('n', 'K', '<cmd>Lspsaga hover_doc<CR>', ns)
-map('n', '<leader>q', '<cmd>Lspsaga code_action<CR>', ns)
-map('v', '<leader>q', '<cmd><C-U>Lspsaga range_code_action<CR>', ns)
-map('n', '<leader>rn', '<cmd>Lspsaga rename<CR>', ns)
-map('n', '[g', '<cmd>Lspsaga diagnostic_jump_prev<CR>', ns)
-map('n', ']g', '<cmd>Lspsaga diagnostic_jump_next<CR>', ns)
 
 -- Find files using Telescope command-line sugar.
 map('n', '<leader>f', '<cmd>Telescope find_files<cr>', ns)
