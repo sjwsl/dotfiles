@@ -15,7 +15,8 @@ require('packer').startup(function()
     'nvim-telescope/telescope.nvim',
     requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } }
   }
-
+  
+  use 'ervandew/supertab'
   use 'Chiel92/vim-autoformat'
   use 'Junegunn/vim-easy-align'
   use 'mhinz/vim-signify'
@@ -32,9 +33,9 @@ require('packer').startup(function()
 end)
 
 cmd 'colorscheme gruvbox'
-cmd 'augroup tmux | au VimEnter * hi! Normal guibg=none | augroup END'          -- For diffrent background in inactive tmux pane
+cmd 'augroup tmux | au VimEnter * hi! Normal guibg=none | augroup END'          -- Diffrent background in inactive tmux pane
 g.mapleader = " "
-opt.completeopt = { 'menuone', 'noinsert', 'noselect' }  -- Completion options
+opt.completeopt = { 'menuone', 'longest', 'noselect' }   -- Completion options
 opt.expandtab = true                -- Use spaces instead of tabs
 opt.hidden = true                   -- Enable background buffers
 opt.ignorecase = true               -- Ignore case
@@ -53,13 +54,13 @@ opt.splitright = true               -- Put new windows right of current
 opt.tabstop = 2                     -- Number of spaces tabs count for
 opt.termguicolors = true            -- True color support
 opt.wrap = false                    -- Disable line wrap
-opt.mouse = 'a'
-opt.swapfile = false
+opt.mouse = 'a'                     -- Enable mouse
+opt.swapfile = false                -- Disable swap
 g['netrw_banner'] = 0
 g['netrw_liststyle'] = 3
+g['SuperTabDefaultCompletionType'] = "<c-x><c-o>"
 
 map('i', 'jk', '<esc>', ns)
-map('i', '<C-N>', '<C-X><C-O>', ns)
 map('', 'cp', '"+y', ns)
 map('n', '<leader>e', '<cmd>edit .<CR>', ns)
 
@@ -99,7 +100,7 @@ lsp.clangd.setup {
   cmd = { "clangd", "--background-index", "--clang-tidy" }
 }
 
-lsp.pyright.setup{
+lsp.pylsp.setup{
   on_attach = on_attach
 }
 
@@ -117,8 +118,6 @@ require 'telescope'.setup(
 }
 )
 require('telescope').load_extension('fzf')
-
-g['completion_enable_auto_popup'] = 0
 
 -- Find files using Telescope command-line sugar.
 map('n', '<leader>f', '<cmd>Telescope find_files<cr>', ns)
