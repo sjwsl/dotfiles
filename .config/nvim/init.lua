@@ -26,7 +26,6 @@ require('packer').startup(function()
   use 'tpope/vim-surround'
   use 'morhetz/gruvbox'
   use 'neovim/nvim-lspconfig'
-  use 'glepnir/lspsaga.nvim'
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use 'wakatime/vim-wakatime'
 
