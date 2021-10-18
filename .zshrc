@@ -111,4 +111,5 @@ zvm_after_init_commands+=('bindkey "^P" up-line-or-beginning-search')
 zvm_after_init_commands+=('bindkey "^N" down-line-or-beginning-search')
 
 # local config
-[[ -f $HOME/.local/.zshrc.local ]] && source $HOME/.local/.zshrc.local
+zvm_after_init_commands+=('[[ -f $HOME/.local/.zshrc.local ]] && source $HOME/.local/.zshrc.local')
+
