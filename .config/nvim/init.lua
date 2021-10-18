@@ -103,6 +103,10 @@ lsp.pylsp.setup{
   on_attach = on_attach
 }
 
+lsp.gopls.setup{
+  on_attach = on_attach
+}
+
 require 'telescope'.setup(
 {
   defaults = {
