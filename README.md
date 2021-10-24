@@ -42,7 +42,7 @@ Or if you want local/experimental changes, create a corresponding file in `$HOME
 - Full set of [gruvbox-dark](https://github.com/morhetz/gruvbox) theme (iTerm2, zsh, tmux, vim)
 - Minimal Zsh configuration with some useful tools installed
 - More comfortable tmux key bindings
-- Raletively simple vim configuration in one file with powerful C++ support and basic support for other languages (thanks to the awesome plugins)
+- Neovim configuration using pure Lua with powerful C++ support and basic support for other languages (thanks to the awesome plugins)
 
 ## Thanks to
 
@@ -54,10 +54,9 @@ Or if you want local/experimental changes, create a corresponding file in `$HOME
 
 ## TODO
 
-- [x] All vim configuration in `.vimrc`
 - [ ] Platform-specific configurations (currently mainly focused on macOS)
 - [ ] Better compatibility
 - [ ] Fewer plugin dependencies (long term)
 - [ ] More concise vim configuration
 - [ ] Option for bootstrap to install extra tools
-- [ ] Support more local configuration
+- [x] Support more local configuration
