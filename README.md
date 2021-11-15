@@ -50,7 +50,6 @@ Or if you want local/experimental changes, create a corresponding file in `$HOME
 - [vim-plug](https://github.com/junegunn/vim-plug)
 - [tpm](https://github.com/tmux-plugins/tpm)
 - [gruvbox](https://github.com/morhetz/gruvbox)
-- [coc.nvim](https://github.com/neoclide/coc.nvim)
 
 ## TODO
 
