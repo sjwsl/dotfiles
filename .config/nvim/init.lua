@@ -28,6 +28,7 @@ require('packer').startup(function()
   use 'neovim/nvim-lspconfig'
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use 'wakatime/vim-wakatime'
+  use 'Olical/conjure'
 
 end)
 
@@ -104,6 +105,10 @@ lsp.pylsp.setup{
 }
 
 lsp.gopls.setup{
+  on_attach = on_attach
+}
+
+lsp.eslint.setup{
   on_attach = on_attach
 }
 
