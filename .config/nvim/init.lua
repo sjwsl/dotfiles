@@ -29,12 +29,14 @@ require('packer').startup(function()
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use 'wakatime/vim-wakatime'
   use 'Olical/conjure'
+  use 'jiangmiao/auto-pairs'
 
 end)
 
 cmd 'colorscheme gruvbox'
 cmd 'augroup tmux | au VimEnter * hi! Normal guibg=none | augroup END'          -- Diffrent background in inactive tmux pane
 g.mapleader = " "
+g.maplocalleader = "\\"
 opt.completeopt = { 'menuone', 'longest', 'noselect' }   -- Completion options
 opt.expandtab = true                -- Use spaces instead of tabs
 opt.hidden = true                   -- Enable background buffers
@@ -140,5 +142,3 @@ map('n', '<leader>t', '<cmd>Telescope treesitter<cr>', ns)
 -- tmux panes
 -- specify path in file fuzzy finder
 -- toggle hlsearsh
--- telescope performance
--- ctags
