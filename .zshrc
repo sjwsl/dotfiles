@@ -102,10 +102,10 @@ bindkey '^[[A' up-line-or-beginning-search
 bindkey '^[[B' down-line-or-beginning-search
 
 # fzf key bindings and fuzzy completion
-zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
-zvm_after_init_commands+=('bindkey "^P" up-line-or-beginning-search')
-zvm_after_init_commands+=('bindkey "^N" down-line-or-beginning-search')
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+bindkey "^P" up-line-or-beginning-search
+bindkey "^N" down-line-or-beginning-search
 
 # local config
-zvm_after_init_commands+=('[[ -f $HOME/.local/.zshrc.local ]] && source $HOME/.local/.zshrc.local')
+[[ -f $HOME/.local/.zshrc.local ]] && source $HOME/.local/.zshrc.local
 
