@@ -17,7 +17,6 @@ zplug "romkatv/powerlevel10k", as:theme, depth:1
 zplug "sobolevn/wakatime-zsh-plugin"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting"
-zplug "jeffreytse/zsh-vi-mode"
 
 if ! zplug check; then
   printf "Install zsh plugins? [y/N]: "
@@ -95,22 +94,18 @@ alias ld="ls -lhF ${colorflag} | grep --color=never '^d'"
 # https://unix.stackexchange.com/questions/141367/have-xargs-use-alias-instead-of-binary
 alias xargs="xargs "
 
-# bindkey
-bindkey -v
 # bindkey "^P" up-line-or-beginning-search
 # bindkey "^N" down-line-or-beginning-search
-# todo: OSX $key and $terminfo values are both wrong, so hardcode
+# todo: OSX $key and $terminfo values are both wrong, so hardcode here
+bindkey -e
 bindkey '^[[A' up-line-or-beginning-search
 bindkey '^[[B' down-line-or-beginning-search
 
-export ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
-
 # fzf key bindings and fuzzy completion
-zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
-zvm_after_init_commands+=('source /usr/share/doc/fzf/examples/key-bindings.zsh')
-zvm_after_init_commands+=('source /usr/share/doc/fzf/examples/completion.zsh')
-zvm_after_init_commands+=('bindkey "^P" up-line-or-beginning-search')
-zvm_after_init_commands+=('bindkey "^N" down-line-or-beginning-search')
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+bindkey "^P" up-line-or-beginning-search
+bindkey "^N" down-line-or-beginning-search
 
 # local config
 [[ -f $HOME/.local/.zshrc.local ]] && source $HOME/.local/.zshrc.local
+

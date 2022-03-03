@@ -1,6 +1,0 @@
-{
-  "suggest.triggerCompletionWait": 500,
-  "python.jediEnabled": false,
-  "tabnine.priority": 70,
-  "clangd.arguments": ["--clang-tidy"]
-}
