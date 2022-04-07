@@ -3,6 +3,7 @@ local fn = vim.fn
 local g = vim.g
 local opt = vim.opt
 local map = vim.api.nvim_set_keymap
+local n = { noremap = true }
 local ns = { noremap = true, silent = true }
 local s = { silent = true }
 
@@ -27,7 +28,6 @@ require('packer').startup(function()
   use 'morhetz/gruvbox'
   use 'neovim/nvim-lspconfig'
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  use 'wakatime/vim-wakatime'
   use 'Olical/conjure'
   use 'jiangmiao/auto-pairs'
 
@@ -136,6 +136,19 @@ map('n', '<leader>m', '<cmd>Telescope oldfiles<cr>', ns)
 map('n', '<leader>p', '<cmd>Telescope live_grep<cr>', ns)
 map('n', '<leader>s', '<cmd>Telescope grep_string<cr>', ns)
 map('n', '<leader>t', '<cmd>Telescope treesitter<cr>', ns)
+
+map('n', 'tn', '<cmd>tabnew<cr>', ns)
+map('n', 'tt', ':tabedit<space>', n)
+map('n', 'tw', '<cmd>tabclose<cr>', ns)
+map('n', 'th', '<cmd>tabprev<cr>', ns)
+map('n', 'tl', '<cmd>tabnext<cr>', ns)
+map('n', '<leader>1', '1gt', ns)
+map('n', '<leader>2', '2gt', ns)
+map('n', '<leader>3', '3gt', ns)
+map('n', '<leader>4', '4gt', ns)
+map('n', '<leader>5', '5gt', ns)
+map('n', '<leader>6', '6gt', ns)
+map('n', '<leader>7', '7gt', ns)
 
 -- TODO
 -- spellcheck
