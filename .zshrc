@@ -14,7 +14,6 @@ source $ZPLUG_HOME/init.zsh
 
 zplug "agkozak/zsh-z"
 zplug "romkatv/powerlevel10k", as:theme, depth:1
-zplug "sobolevn/wakatime-zsh-plugin"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting"
 

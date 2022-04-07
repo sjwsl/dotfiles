@@ -137,7 +137,7 @@ map('n', '<leader>p', '<cmd>Telescope live_grep<cr>', ns)
 map('n', '<leader>s', '<cmd>Telescope grep_string<cr>', ns)
 map('n', '<leader>t', '<cmd>Telescope treesitter<cr>', ns)
 
-map('n', 'tn', '<cmd>tabnew<cr>', ns)
+map('n', '<c-t>', '<cmd>tabnew<cr>', ns)
 map('n', 'tt', ':tabedit<space>', n)
 map('n', 'tw', '<cmd>tabclose<cr>', ns)
 map('n', 'th', '<cmd>tabprev<cr>', ns)
