@@ -17,10 +17,16 @@ require('packer').startup(function()
     requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } }
   }
   
-  use 'ervandew/supertab'
   use 'Chiel92/vim-autoformat'
   use 'Junegunn/vim-easy-align'
+  use 'Olical/conjure'
+  use 'ervandew/supertab'
+  use 'github/copilot.vim'
+  use 'jiangmiao/auto-pairs'
+  use 'lervag/vimtex'
   use 'mhinz/vim-signify'
+  use 'morhetz/gruvbox'
+  use 'neovim/nvim-lspconfig'
   use 'nvim-treesitter/nvim-treesitter'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-repeat'
@@ -55,12 +61,13 @@ opt.splitbelow = true               -- Put new windows below current
 opt.splitright = true               -- Put new windows right of current
 opt.tabstop = 2                     -- Number of spaces tabs count for
 opt.termguicolors = true            -- True color support
-opt.wrap = false                    -- Disable line wrap
 opt.mouse = 'a'                     -- Enable mouse
 opt.swapfile = false                -- Disable swap
 g['netrw_banner'] = 0
 g['netrw_liststyle'] = 3
 g['SuperTabDefaultCompletionType'] = "<c-x><c-o>"
+g['formatdef_latexindent'] = '"latexindent -"'
+g['copilot_no_tab_map'] = true
 
 map('i', 'jk', '<esc>', ns)
 map('', 'cp', '"+y', ns)
@@ -136,6 +143,7 @@ map('n', '<leader>m', '<cmd>Telescope oldfiles<cr>', ns)
 map('n', '<leader>p', '<cmd>Telescope live_grep<cr>', ns)
 map('n', '<leader>s', '<cmd>Telescope grep_string<cr>', ns)
 map('n', '<leader>t', '<cmd>Telescope treesitter<cr>', ns)
+map('i', '<C-E>', 'copilot#Accept("")', {expr=true, silent=true})
 
 map('n', '<c-t>', '<cmd>tabnew<cr>', ns)
 map('n', 'tt', ':tabedit<space>', n)
