@@ -16,7 +16,7 @@ require('packer').startup(function()
     'nvim-telescope/telescope.nvim',
     requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } }
   }
-  
+
   use 'Chiel92/vim-autoformat'
   use 'Junegunn/vim-easy-align'
   use 'Olical/conjure'
@@ -31,12 +31,9 @@ require('packer').startup(function()
   use 'tpope/vim-fugitive'
   use 'tpope/vim-repeat'
   use 'tpope/vim-surround'
-  use 'morhetz/gruvbox'
-  use 'neovim/nvim-lspconfig'
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  use 'Olical/conjure'
-  use 'jiangmiao/auto-pairs'
-
+  use 'p00f/clangd_extensions.nvim'
+  use 'ray-x/lsp_signature.nvim'
 end)
 
 cmd 'colorscheme gruvbox'
@@ -63,6 +60,7 @@ opt.tabstop = 2                     -- Number of spaces tabs count for
 opt.termguicolors = true            -- True color support
 opt.mouse = 'a'                     -- Enable mouse
 opt.swapfile = false                -- Disable swap
+opt.updatetime = 0                  -- Update time in milliseconds
 g['netrw_banner'] = 0
 g['netrw_liststyle'] = 3
 g['SuperTabDefaultCompletionType'] = "<c-x><c-o>"
@@ -72,9 +70,11 @@ g['copilot_no_tab_map'] = true
 map('i', 'jk', '<esc>', ns)
 map('', 'cp', '"+y', ns)
 map('n', '<leader>e', '<cmd>edit .<CR>', ns)
+map('n', '<C-s>', '<cmd>w<CR>', n)
+map('i', '<C-s>', '<cmd>w<CR>', n)
 
 require 'nvim-treesitter.configs'.setup {
-  ensure_installed = 'maintained', highlight = { enable = true }
+  highlight = { enable = true }
 }
 
 local lsp = require 'lspconfig'
@@ -96,42 +96,71 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
   buf_set_keymap('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('i', '<c-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 end
+
+-- Fix "multiple clients with different offset encodings" error
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.offsetEncoding = { "utf-16" }
+
+require "lsp_signature".setup {
+  floating_window = false,
+  hint_enable = false,
+}
+
+current_signature = function()
+  if not pcall(require, 'lsp_signature') then return end
+  local sig = require("lsp_signature").status_line(10000)
+  return sig.hint
+end
+
+get_filename = function()
+  return "%<%f "
+end
+
+statusline = function()
+  return get_filename() .. current_signature()
+end
+
+vim.api.nvim_exec([[set statusline=%!v:lua.statusline()]], false)
 
 lsp.clangd.setup {
   on_attach = on_attach,
-  cmd = { "clangd", "--background-index", "--clang-tidy" }
+  cmd = { "clangd", "--background-index", "--clang-tidy" },
+  capabilities = capabilities,
 }
 
-lsp.pylsp.setup{
+lsp.pylsp.setup {
   on_attach = on_attach
 }
 
-lsp.gopls.setup{
+lsp.gopls.setup {
   on_attach = on_attach
 }
 
-lsp.eslint.setup{
+lsp.eslint.setup {
+  on_attach = on_attach
+}
+
+lsp.rust_analyzer.setup {
   on_attach = on_attach
 }
 
 require 'telescope'.setup(
 {
-  defaults = {
-    extensions = {
-      fzf = {
-        override_generic_sorter = false, -- override the generic sorter
-        override_file_sorter = true,     -- override the file sorter
-        case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-      }
+defaults = {
+  extensions = {
+    fzf = {
+      override_generic_sorter = false, -- override the generic sorter
+      override_file_sorter = true,     -- override the file sorter
+      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
     }
   }
+}
 }
 )
 require('telescope').load_extension('fzf')
