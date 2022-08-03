@@ -110,6 +110,7 @@ bindkey "^N" down-line-or-beginning-search
 
 # fzf key bindings and fuzzy completion
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_OPTS="-m --bind ctrl-s:toggle,ctrl-a:toggle-all --history $HOME/.fzf_history"
 
 # local config
 [[ -f $HOME/.local/.zshrc.local ]] && source $HOME/.local/.zshrc.local
