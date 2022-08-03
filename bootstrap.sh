@@ -10,8 +10,6 @@ function sync() {
     -avh --no-perms . ~
 
   tmux source-file ~/.tmux.conf
-
-  nvim -c 'PackerSync'
 }
 
 function mac_init() {
@@ -20,22 +18,22 @@ function mac_init() {
   fi
 
   brew update
-  brew install coreutils
-  brew install git
-  brew install neovim
-  brew install tmux
-  brew install cmake
-  brew install curl
-  brew install fzf
-  brew install node
-  brew install npm
-  brew install python3
-  brew install rsync
-  brew install yarn
-  brew install zsh
-  brew install ripgrep
-  brew install fd
-  brew install bat
+  brew install coreutils \
+               git \
+               neovim \
+               tmux \
+               cmake \
+               curl \
+               fzf \
+               node \
+               npm \
+               python3 \
+               rsync \
+               yarn \
+               zsh \
+               ripgrep \
+               fd \
+               bat
 
   open ./Gruvbox.itermcolors
 
@@ -44,34 +42,27 @@ function mac_init() {
 }
 
 function linux_init() {
-  if ! [ -x "$(command -v sudo)" ]; then
-    apt update
-    apt install sudo
-  else
-    sudo apt update
-  fi
+  sudo apt update
 
-  curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-
-  sudo apt install -y cmake
-  sudo apt install -y coreutils
-  sudo apt install -y curl
-  sudo apt install -y git
-  sudo apt install -y global
-  sudo apt install -y neovim
-  sudo apt install -y nodejs
-  sudo apt install -y npm
-  sudo apt install -y pip
-  sudo apt install -y python
-  sudo apt install -y rsync
-  sudo apt install -y tmux
-  sudo apt install -y yarn
-  sudo apt install -y zsh
-  sudo apt install -y fd-find
-  sudo apt install -y bat
-  sudo apt-get install -y fzf
-  sudo apt-get install -y locales
-  sudo apt-get install -y ripgrep
+  sudo apt install -y cmake \
+                      coreutils \
+                      curl \
+                      git \
+                      global \
+                      neovim \
+                      nodejs \
+                      npm \
+                      pip \
+                      python \
+                      rsync \
+                      tmux \
+                      yarn \
+                      zsh \
+                      fd-find \
+                      bat \
+                      fzf \
+                      locales \
+                      ripgrep
 
   sudo locale-gen en_US.UTF-8
   sudo locale-gen zh_CN.UTF-8
@@ -92,15 +83,15 @@ function init() {
   fi
 
   # packer.nvim
-  git clone https://github.com/wbthomason/packer.nvim\
+  git clone https://github.com/wbthomason/packer.nvim \
     ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
   # tpm
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
   # wakatime
-  pip install wakatime
-  sudo ln -s $HOME/.local/bin/wakatime /usr/local/bin/wakatime
+  # pip install wakatime
+  # sudo ln -s $HOME/.local/bin/wakatime /usr/local/bin/wakatime
 }
 
 if [ "$1" = "--init" ] || [ "$1" = "-i" ]; then
