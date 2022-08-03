@@ -1,8 +1,3 @@
-# language
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-export LANGUAGE=en_US.UTF-8
-
 # zplug
 if [ "$(uname)" = "Darwin" ]; then
   export ZPLUG_HOME=/usr/local/opt/zplug
@@ -26,6 +21,18 @@ fi
 
 zplug load
 
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# language
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+
 # common
 export EDITOR='nvim'
 export TERM=xterm-256color
@@ -45,13 +52,6 @@ export HISTFILE=~/.zsh_history
 setopt INC_APPEND_HISTORY
 #save only one command if 2 common are same and consistent
 setopt HIST_IGNORE_DUPS
-
-# make search up and down work, so partially type and hit up/down to find relevant stuff
-# todo: refresh zsh-syntax-highlighting
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
 
 # homebrew completion
 if [ "$(uname)" = "Darwin" ]; then
@@ -95,16 +95,21 @@ alias xargs="xargs "
 
 # bindkey "^P" up-line-or-beginning-search
 # bindkey "^N" down-line-or-beginning-search
+# make search up and down work, so partially type and hit up/down to find relevant stuff
 # todo: OSX $key and $terminfo values are both wrong, so hardcode here
+# todo: refresh zsh-syntax-highlighting
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
 bindkey -e
 bindkey '^[[A' up-line-or-beginning-search
 bindkey '^[[B' down-line-or-beginning-search
-
-# fzf key bindings and fuzzy completion
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 bindkey "^P" up-line-or-beginning-search
 bindkey "^N" down-line-or-beginning-search
 
+# fzf key bindings and fuzzy completion
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # local config
 [[ -f $HOME/.local/.zshrc.local ]] && source $HOME/.local/.zshrc.local
-
