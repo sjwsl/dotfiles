@@ -20,7 +20,7 @@ require('packer').startup(function()
   use 'Chiel92/vim-autoformat'
   use 'Junegunn/vim-easy-align'
   use 'Olical/conjure'
-  use 'ervandew/supertab'
+  -- use 'ervandew/supertab'
   use 'github/copilot.vim'
   use 'jiangmiao/auto-pairs'
   use 'lervag/vimtex'
@@ -34,7 +34,104 @@ require('packer').startup(function()
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use 'p00f/clangd_extensions.nvim'
   use 'ray-x/lsp_signature.nvim'
+  use "hrsh7th/nvim-cmp" --completion
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
 end)
+
+local tabnine = require('cmp_tabnine.config')
+
+local cmp = require'cmp'
+
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+cmp.setup({
+    window = {
+      -- completion = cmp.config.window.bordered(),
+      -- documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<Tab>'] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+                elseif has_words_before() then
+                    cmp.complete()
+                else
+                    fallback()
+                end
+            end, {"i", "s"}),
+      ['<S-Tab>'] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                    cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+                else
+                    fallback()
+                end
+            end, {"i", "s"}),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    }),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp', priority = 8 },
+      { name = 'cmp_tabnine', priority = 9 }
+    }, {
+      { name = 'buffer' },
+    }),
+    experimental = {
+        ghost_text = false
+    },
+    completion = { 
+	autocomplete = false
+    }
+  }
+  )
+
+  -- Set configuration for specific filetype.
+  cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline('/', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
+
+
+tabnine.setup({
+	max_lines = 1000,
+	max_num_results = 1,
+	sort = true,
+	run_on_every_keystroke = true,
+	snippet_placeholder = '..',
+	ignored_file_types = { 
+		-- default is not to ignore
+		-- uncomment to ignore in lua:
+		-- lua = true
+	},
+	show_prediction_strength = false
+})
 
 cmd 'colorscheme gruvbox'
 cmd 'augroup tmux | au VimEnter * hi! Normal guibg=none | augroup END'          -- Diffrent background in inactive tmux pane
@@ -50,22 +147,23 @@ opt.number = true                   -- Show line numbers
 opt.relativenumber = true           -- Relative line numbers
 opt.scrolloff = 4                   -- Lines of context
 opt.shiftround = true               -- Round indent
-opt.shiftwidth = 2                  -- Size of an indent
+opt.shiftwidth = 4                  -- Size of an indent
 opt.sidescrolloff = 8               -- Columns of context
 opt.smartcase = true                -- Do not ignore case with capitals
 opt.smartindent = true              -- Insert indents automatically
 opt.splitbelow = true               -- Put new windows below current
 opt.splitright = true               -- Put new windows right of current
-opt.tabstop = 2                     -- Number of spaces tabs count for
+opt.tabstop = 4                     -- Number of spaces tabs count for
 opt.termguicolors = true            -- True color support
 opt.mouse = 'a'                     -- Enable mouse
 opt.swapfile = false                -- Disable swap
 opt.updatetime = 0                  -- Update time in milliseconds
 g['netrw_banner'] = 0
 g['netrw_liststyle'] = 3
-g['SuperTabDefaultCompletionType'] = "<c-x><c-o>"
+-- g['SuperTabDefaultCompletionType'] = "<c-x><c-o>"
 g['formatdef_latexindent'] = '"latexindent -"'
 g['copilot_no_tab_map'] = true
+g['copilot_assume_mapped'] = true
 
 map('i', 'jk', '<esc>', ns)
 map('', 'cp', '"+y', ns)
