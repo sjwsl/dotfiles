@@ -37,10 +37,13 @@ require('packer').startup(function()
   use "hrsh7th/nvim-cmp" --completion
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
-  use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
+  use 'mechatroner/rainbow_csv'
+  use 'sindrets/diffview.nvim'
+  use 'urbainvaes/vim-ripple'
+  use 'cespare/vim-toml'
 end)
 
-local tabnine = require('cmp_tabnine.config')
+require("nvim-treesitter.install").prefer_git = true
 
 local cmp = require'cmp'
 
@@ -74,11 +77,9 @@ cmp.setup({
                 end
             end, {"i", "s"}),
       ['<C-e>'] = cmp.mapping.abort(),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
     sources = cmp.config.sources({
       { name = 'nvim_lsp', priority = 8 },
-      { name = 'cmp_tabnine', priority = 9 }
     }, {
       { name = 'buffer' },
     }),
@@ -119,22 +120,9 @@ cmp.setup({
   })
 
 
-tabnine.setup({
-	max_lines = 1000,
-	max_num_results = 1,
-	sort = true,
-	run_on_every_keystroke = true,
-	snippet_placeholder = '..',
-	ignored_file_types = { 
-		-- default is not to ignore
-		-- uncomment to ignore in lua:
-		-- lua = true
-	},
-	show_prediction_strength = false
-})
-
 cmd 'colorscheme gruvbox'
 cmd 'augroup tmux | au VimEnter * hi! Normal guibg=none | augroup END'          -- Diffrent background in inactive tmux pane
+cmd 'augroup tree-sitter | au VimEnter * hi! link Error Normal | augroup END'          -- FIXME: tree-sitter reports false-positive errors sometimes, so hide them
 g.mapleader = " "
 g.maplocalleader = "\\"
 opt.completeopt = { 'menuone', 'longest', 'noselect' }   -- Completion options
@@ -232,8 +220,39 @@ lsp.clangd.setup {
   capabilities = capabilities,
 }
 
+lsp.gopls.setup {
+    on_attach = on_attach,
+}
+
+lsp.golangci_lint_ls.setup {
+    on_attach = on_attach,
+}
+
 lsp.pylsp.setup {
-  on_attach = on_attach
+    on_attach = on_attach,
+    filetypes = {'python'},
+    settings = {
+        configurationSources = {"flake8"},
+        formatCommand = {"black"},
+        pylsp = {
+            plugins = {
+            -- jedi_completion = {fuzzy = true},
+            -- jedi_completion = {eager=true},
+            jedi_completion = {
+                include_params = true,
+            },
+            jedi_signature_help = {enabled = true},
+            pyflakes={enabled=true},
+            -- pylint = {args = {'--ignore=E501,E231', '-'}, enabled=true, debounce=200},
+            pylsp_mypy={enabled=false},
+            pycodestyle={
+                enabled=true,
+                ignore={'E501', 'E231'},
+                maxLineLength=120},
+                yapf={enabled=true}
+            }
+        }
+    }
 }
 
 lsp.gopls.setup {
@@ -271,6 +290,11 @@ map('n', '<leader>p', '<cmd>Telescope live_grep<cr>', ns)
 map('n', '<leader>s', '<cmd>Telescope grep_string<cr>', ns)
 map('n', '<leader>t', '<cmd>Telescope treesitter<cr>', ns)
 map('i', '<C-E>', 'copilot#Accept("")', {expr=true, silent=true})
+map('n', '<C-Y>', '<Plug>(ripple_send_line)', {silent=true})
+map('i', '<C-Y>', '<C-O><C-Y>', {silent=true})
+map('v', '<C-Y>', '<Plug>(ripple_send_selection)', {silent=true})
+map('n', '<leader>y', 'yrap', {silent=true})
+map('n', 'yrc', '<cmd>:Ripple clear<cr>', {silent=true})
 
 map('n', '<c-t>', '<cmd>tabnew<cr>', ns)
 map('n', 'tt', ':tabedit<space>', n)
