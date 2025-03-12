@@ -1,17 +1,49 @@
-# zplug
+# ======================
+# 1. Environment Variables and Basic Settings
+# ======================
+
+# Language settings
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+
+# Editor and terminal settings
+export EDITOR='nvim'
+export TERM=xterm-256color
+KEYTIMEOUT=1
+
+# History configuration
+export HISTSIZE=100000000
+export SAVEHIST=100000000
+export HISTFILESIZE=1000000000
+export HISTFILE=~/.zsh_history
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
+
+# Automatically push directories to the stack
+setopt AUTOPUSHD
+
+# ======================
+# 2. Zplug Plugin Manager
+# ======================
+
+# Set Zplug path
 if [ "$(uname)" = "Darwin" ]; then
   export ZPLUG_HOME=/usr/local/opt/zplug
 else
   export ZPLUG_HOME=$HOME/.zplug
 fi
 
+# Initialize Zplug
 source $ZPLUG_HOME/init.zsh
 
-zplug "agkozak/zsh-z"
-zplug "romkatv/powerlevel10k", as:theme, depth:1
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-syntax-highlighting"
+# Plugin list
+zplug "agkozak/zsh-z"  # Quick directory navigation
+zplug "romkatv/powerlevel10k", as:theme, depth:1  # Theme
+zplug "zsh-users/zsh-autosuggestions", defer:2  # Autosuggestions
+zplug "zsh-users/zsh-syntax-highlighting", defer:3  # Syntax highlighting
 
+# Check and install plugins if missing
 if ! zplug check; then
   printf "Install zsh plugins? [y/N]: "
   if read -q; then
@@ -19,98 +51,121 @@ if ! zplug check; then
   fi
 fi
 
+# Load plugins
 zplug load
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
+# ======================
+# 3. Powerlevel10k Configuration
+# ======================
+
+# Enable Powerlevel10k instant prompt
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# language
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-export LANGUAGE=en_US.UTF-8
-
-# common
-export EDITOR='nvim'
-export TERM=xterm-256color
-KEYTIMEOUT=1
-
-# cd -
-setopt AUTOPUSHD
-
-# history
-# set history size
-export HISTSIZE=10000
-# save history after logout
-export SAVEHIST=10000
-# history file
-export HISTFILE=~/.zsh_history
-# append into history file
-setopt INC_APPEND_HISTORY
-#save only one command if 2 common are same and consistent
-setopt HIST_IGNORE_DUPS
-
-# homebrew completion
-if [ "$(uname)" = "Darwin" ]; then
-  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-fi
-
-# zsh-z
-autoload -U compinit && compinit
-zstyle ':completion:*' menu select
-export ZSHZ_CASE=smart
-
-# smart-case completion
-zstyle ':completion:*'  matcher-list 'm:{a-z}={A-Z}'
-
-# p10k configuration
+# Load Powerlevel10k configuration
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
-# use neovim
-alias 'vim'='nvim'
+# ======================
+# 4. Completion and Autoload
+# ======================
 
-# Easier navigation
+# Initialize completion system
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+  compinit -i
+else
+  compinit -C -i  # Skip security checks for faster initialization
+fi
+
+# Completion menu and smart case matching
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+# zsh-z configuration
+export ZSHZ_CASE=smart
+
+# ======================
+# 5. Aliases and Key Bindings
+# ======================
+
+# Use Neovim
+alias vim='nvim'
+alias nvimdiff='nvim -d'
+
+# Directory navigation
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-# Detect which `ls` flavor is in use
-if ls --color > /dev/null 2>&1; then # GNU `ls`
+# ls configuration
+if ls --color > /dev/null 2>&1; then
   colorflag="--color"
-else # macOS `ls`
+else
   colorflag="-G"
 fi
-
-# List all files colorized in long format, excluding . and ..
 alias ll="ls -lhF ${colorflag}"
-# List only directories
 alias ld="ls -lhF ${colorflag} | grep --color=never '^d'"
 
-# https://unix.stackexchange.com/questions/141367/have-xargs-use-alias-instead-of-binary
+# xargs alias
 alias xargs="xargs "
 
-# bindkey "^P" up-line-or-beginning-search
-# bindkey "^N" down-line-or-beginning-search
-# make search up and down work, so partially type and hit up/down to find relevant stuff
-# todo: OSX $key and $terminfo values are both wrong, so hardcode here
-# todo: refresh zsh-syntax-highlighting
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
+# Key bindings
 bindkey -e
 bindkey '^[[A' up-line-or-beginning-search
 bindkey '^[[B' down-line-or-beginning-search
 bindkey "^P" up-line-or-beginning-search
 bindkey "^N" down-line-or-beginning-search
+bindkey '^x^e' edit-command-line
+bindkey -s '^.' 'cd ..\n'
+bindkey -s '^,' 'cd -\n'
 
-# fzf key bindings and fuzzy completion
+# ======================
+# 6. FZF Configuration
+# ======================
+
+# Load FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_OPTS="-m --bind ctrl-s:toggle,ctrl-a:toggle-all --history $HOME/.fzf_history"
+export FZF_DEFAULT_OPTS="--layout reverse --height 10% -m --bind ctrl-s:toggle,ctrl-a:toggle-all --history $HOME/.fzf_history"
 
-# local config
+# ======================
+# 7. Local and Path Configuration
+# ======================
+
+# Load local configuration file
 [[ -f $HOME/.local/.zshrc.local ]] && source $HOME/.local/.zshrc.local
+
+# Custom paths
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"/home/tianshu/work/dfs_sh_client/libs"
+export PYTHONPATH=$PYTHONPATH:"/home/tianshu/work/dfs_sh_client"
+export PATH="/usr/lib/ccache:$PATH"
+
+# ======================
+# 8. Conda Configuration (Lazy Load)
+# ======================
+
+lazy_conda() {
+  unset -f lazy_conda
+  # >>> conda initialize >>>
+  __conda_setup="$('/home/tianshu/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+  if [ $? -eq 0 ]; then
+      eval "$__conda_setup"
+  else
+      if [ -f "/home/tianshu/miniconda3/etc/profile.d/conda.sh" ]; then
+          . "/home/tianshu/miniconda3/etc/profile.d/conda.sh"
+      else
+          export PATH="/home/tianshu/miniconda3/bin:$PATH"
+      fi
+  fi
+  unset __conda_setup
+  # <<< conda initialize <<<
+}
+conda() { lazy_conda; conda "$@"; }
+
+# ======================
+# 9. Miscellaneous Configuration
+# ======================
+
+# Enable zprof for profiling (uncomment for debugging)
+# zmodload zsh/zprof

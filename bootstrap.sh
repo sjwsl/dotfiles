@@ -82,10 +82,6 @@ function init() {
     linux_init
   fi
 
-  # packer.nvim
-  git clone https://github.com/wbthomason/packer.nvim \
-    ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-
   # tpm
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 

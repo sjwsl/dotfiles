@@ -55,7 +55,7 @@ Or if you want local/experimental changes, create a corresponding file in `$HOME
 
 - [ ] Platform-specific configurations (currently mainly focused on macOS)
 - [ ] Better compatibility
-- [ ] Fewer plugin dependencies (long term)
-- [ ] More concise vim configuration
+- [x] Fewer plugin dependencies (long term)
+- [x] More concise vim configuration
 - [ ] Option for bootstrap to install extra tools
 - [x] Support more local configuration

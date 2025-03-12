@@ -1,233 +1,340 @@
+-----------------------------------------------------------
+-- Initial setup and package management
+-----------------------------------------------------------
 local cmd = vim.cmd
 local fn = vim.fn
 local g = vim.g
 local opt = vim.opt
 local map = vim.api.nvim_set_keymap
-local n = { noremap = true }
-local ns = { noremap = true, silent = true }
-local s = { silent = true }
+local key_opts = { noremap = true, silent = true }
 
-cmd 'packadd packer.nvim'
-
-require('packer').startup(function()
-  use 'wbthomason/packer.nvim'
-
-  use {
-    'nvim-telescope/telescope.nvim',
-    requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } }
-  }
-
-  use 'Chiel92/vim-autoformat'
-  use 'Junegunn/vim-easy-align'
-  use 'Olical/conjure'
-  -- use 'ervandew/supertab'
-  use 'github/copilot.vim'
-  use 'jiangmiao/auto-pairs'
-  use 'lervag/vimtex'
-  use 'mhinz/vim-signify'
-  use 'morhetz/gruvbox'
-  use 'neovim/nvim-lspconfig'
-  use 'nvim-treesitter/nvim-treesitter'
-  use 'tpope/vim-fugitive'
-  use 'tpope/vim-repeat'
-  use 'tpope/vim-surround'
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  use 'p00f/clangd_extensions.nvim'
-  use 'ray-x/lsp_signature.nvim'
-  use "hrsh7th/nvim-cmp" --completion
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-buffer'
-  use 'mechatroner/rainbow_csv'
-  use 'sindrets/diffview.nvim'
-  use 'urbainvaes/vim-ripple'
-  use 'cespare/vim-toml'
-end)
-
-require("nvim-treesitter.install").prefer_git = true
-
-local cmp = require'cmp'
-
-local has_words_before = function()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
 end
+vim.opt.rtp:prepend(lazypath)
 
-cmp.setup({
-    window = {
-      -- completion = cmp.config.window.bordered(),
-      -- documentation = cmp.config.window.bordered(),
+require("lazy").setup({
+  -- Package manager
+  { "wbthomason/packer.nvim" }, -- Keep packer for potential rollback
+
+  -- File navigation
+  {
+    "stevearc/oil.nvim",
+    opts = {},
+    event = "VimEnter",
+  },
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = {
+      "nvim-lua/popup.nvim",
+      "nvim-lua/plenary.nvim",
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
-    mapping = cmp.mapping.preset.insert({
-      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      ['<Tab>'] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-                elseif has_words_before() then
-                    cmp.complete()
-                else
-                    fallback()
-                end
-            end, {"i", "s"}),
-      ['<S-Tab>'] = cmp.mapping(function(fallback)
-                if cmp.visible() then
-                    cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
-                else
-                    fallback()
-                end
-            end, {"i", "s"}),
-      ['<C-e>'] = cmp.mapping.abort(),
-    }),
-    sources = cmp.config.sources({
-      { name = 'nvim_lsp', priority = 8 },
-    }, {
-      { name = 'buffer' },
-    }),
-    experimental = {
-        ghost_text = false
+    -- cmd = "Telescope",
+    config = function()
+      require("telescope").setup()
+      require("telescope").load_extension("fzf")
+    end,
+  },
+
+  -- LSP and completion
+  {
+    "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      { "hrsh7th/cmp-nvim-lsp", lazy = true },
+      { "p00f/clangd_extensions.nvim", lazy = true },
     },
-    completion = { 
-	autocomplete = false
-    }
-  }
-  )
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
+    dependencies = {
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "f3fora/cmp-spell",
+    },
+  },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "InsertEnter",
+    config = true,
+  },
 
-  -- Set configuration for specific filetype.
-  cmp.setup.filetype('gitcommit', {
-    sources = cmp.config.sources({
-      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-    }, {
-      { name = 'buffer' },
-    })
-  })
+  -- AI integration
+  {
+    "zbirenbaum/copilot.lua",
+    -- event = "InsertEnter",
+    config = function()
+      require("copilot").setup({ suggestion = { auto_trigger = true } })
+    end,
+  },
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    cmd = "CopilotChat",
+    config = true,
+  },
 
-  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline('/', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-      { name = 'buffer' }
-    }
-  })
+  -- Syntax and language tools
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    event = { "BufReadPost", "BufNewFile" },
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        highlight = { enable = true },
+        incremental_selection = { enable = false },
+      })
+    end,
+  },
+  {
+    "nvim-treesitter/playground",
+    cmd = "TSPlaygroundToggle",
+  },
+  {
+    "cespare/vim-toml",
+    ft = "toml",
+  },
+  {
+    "mechatroner/rainbow_csv",
+    ft = "csv",
+  },
 
-  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-      { name = 'path' }
-    }, {
-      { name = 'cmdline' }
-    })
-  })
+  -- Editing enhancements
+  {
+    "jiangmiao/auto-pairs",
+  },
+  {
+    "tpope/vim-surround",
+    keys = { "cs", "ds", "ys" },
+  },
+  {
+    "tpope/vim-repeat",
+    lazy = true, -- Loaded automatically by keymaps
+  },
+  {
+    "mhinz/vim-signify",
+    event = "BufReadPre",
+  },
+  {
+    "junegunn/vim-easy-align",
+    keys = { { "ga", mode = { "n", "v" } } },
+  },
+  {
+    "mhartington/formatter.nvim",
+    cmd = "Format",
+    config = true,
+  },
 
+  -- UI and themes
+  {
+    "morhetz/gruvbox",
+    lazy = false, -- Load immediately for proper colorscheme setup
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme("gruvbox")
+    end,
+  },
+  {
+    "sindrets/diffview.nvim",
+    cmd = { "DiffviewOpen", "DiffviewClose" },
+  },
 
-cmd 'colorscheme gruvbox'
-cmd 'augroup tmux | au VimEnter * hi! Normal guibg=none | augroup END'          -- Diffrent background in inactive tmux pane
-cmd 'augroup tree-sitter | au VimEnter * hi! link Error Normal | augroup END'          -- FIXME: tree-sitter reports false-positive errors sometimes, so hide them
-g.mapleader = " "
-g.maplocalleader = "\\"
-opt.completeopt = { 'menuone', 'longest', 'noselect' }   -- Completion options
-opt.expandtab = true                -- Use spaces instead of tabs
-opt.hidden = true                   -- Enable background buffers
-opt.ignorecase = true               -- Ignore case
-opt.joinspaces = false              -- No double spaces with join
-opt.list = true                     -- Show some invisible characters
-opt.number = true                   -- Show line numbers
-opt.relativenumber = true           -- Relative line numbers
-opt.scrolloff = 4                   -- Lines of context
-opt.shiftround = true               -- Round indent
-opt.shiftwidth = 4                  -- Size of an indent
-opt.sidescrolloff = 8               -- Columns of context
-opt.smartcase = true                -- Do not ignore case with capitals
-opt.smartindent = true              -- Insert indents automatically
-opt.splitbelow = true               -- Put new windows below current
-opt.splitright = true               -- Put new windows right of current
-opt.tabstop = 4                     -- Number of spaces tabs count for
-opt.termguicolors = true            -- True color support
-opt.mouse = 'a'                     -- Enable mouse
-opt.swapfile = false                -- Disable swap
-opt.updatetime = 0                  -- Update time in milliseconds
-g['netrw_banner'] = 0
-g['netrw_liststyle'] = 3
--- g['SuperTabDefaultCompletionType'] = "<c-x><c-o>"
-g['formatdef_latexindent'] = '"latexindent -"'
-g['copilot_no_tab_map'] = true
-g['copilot_assume_mapped'] = true
+  -- Version control
+  {
+    "tpope/vim-fugitive",
+    cmd = { "G", "Git" },
+  },
+  {
+    "urbainvaes/vim-ripple",
+    keys = "<C-Y>",
+  },
+}, {
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "gzip",
+        "matchit",
+        "matchparen",
+        "netrwPlugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
+    },
+  },
+})
 
-map('i', 'jk', '<esc>', ns)
-map('', 'cp', '"+y', ns)
-map('n', '<leader>e', '<cmd>edit .<CR>', ns)
-map('n', '<C-s>', '<cmd>w<CR>', n)
-map('i', '<C-s>', '<cmd>w<CR>', n)
+-- cmd 'packadd packer.nvim'
+-- require('packer').startup(function(use)
+--   use 'wbthomason/packer.nvim'
+-- 
+--   -- File navigation
+--   use 'stevearc/oil.nvim'
+--   use { 'nvim-telescope/telescope.nvim', requires = {
+--     'nvim-lua/popup.nvim',
+--     'nvim-lua/plenary.nvim',
+--     'nvim-telescope/telescope-fzf-native.nvim'
+--   }}
+-- 
+--   -- LSP and completion
+--   use 'neovim/nvim-lspconfig'
+--   use 'hrsh7th/nvim-cmp'
+--   use 'hrsh7th/cmp-nvim-lsp'
+--   use 'hrsh7th/cmp-buffer'
+--   use 'hrsh7th/cmp-path'
+--   use 'f3fora/cmp-spell'
+--   use 'p00f/clangd_extensions.nvim'
+--   use 'ray-x/lsp_signature.nvim'
+-- 
+--   -- AI integration
+--   use 'zbirenbaum/copilot.lua'
+--   use 'CopilotC-Nvim/CopilotChat.nvim'
+-- 
+--   -- Syntax and language tools
+--   use 'nvim-treesitter/nvim-treesitter'
+--   use 'nvim-treesitter/playground'
+--   use 'cespare/vim-toml'
+--   use 'mechatroner/rainbow_csv'
+-- 
+--   -- Editing enhancements
+--   use 'jiangmiao/auto-pairs'
+--   use 'tpope/vim-surround'
+--   use 'tpope/vim-repeat'
+--   use 'mhinz/vim-signify'
+--   use 'junegunn/vim-easy-align'
+--   use 'mhartington/formatter.nvim'
+-- 
+--   -- UI and themes
+--   use 'morhetz/gruvbox'
+--   use 'sindrets/diffview.nvim'
+-- 
+--   -- Version control
+--   use 'tpope/vim-fugitive'
+--   use 'urbainvaes/vim-ripple'
+-- end)
 
-require 'nvim-treesitter.configs'.setup {
-  highlight = { enable = true }
-}
+-----------------------------------------------------------
+-- General settings
+-----------------------------------------------------------
+g.mapleader = ' '
+g.maplocalleader = '\\'
+g.python3_host_prog = 'python3'
 
-local lsp = require 'lspconfig'
+-- Editor options
+opt.termguicolors = true
+opt.number = true
+opt.relativenumber = true
+opt.mouse = 'a'
+opt.scrolloff = 8
+opt.sidescrolloff = 8
+opt.clipboard = 'unnamedplus'
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+-- Indentation
+opt.expandtab = true
+opt.shiftwidth = 4
+opt.tabstop = 4
+opt.smartindent = true
 
-  -- Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+-- Search
+opt.ignorecase = true
+opt.smartcase = true
+opt.hlsearch = true
 
-  -- Mappings.
-  local opts = { noremap=true, silent=true }
+-- Window management
+opt.splitbelow = true
+opt.splitright = true
 
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
-  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('i', '<c-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-end
+-- File handling
+opt.hidden = true
+opt.swapfile = false
+opt.updatetime = 100
 
--- Fix "multiple clients with different offset encodings" error
+-----------------------------------------------------------
+-- Key mappings
+-----------------------------------------------------------
+-- General shortcuts
+map('n', '<leader>e', '<cmd>edit .<CR>', key_opts)
+map('n', '<C-s>', '<cmd>w<CR>', key_opts)
+map('i', '<C-s>', '<cmd>w<CR>', key_opts)
+map('i', 'jk', '<ESC>', key_opts)
+
+-- Tab management
+map('n', '<C-t>', '<cmd>tabnew<CR>', key_opts)
+map('n', 'tt', ':tabedit<space>', key_opts)
+map('n', 'tw', '<cmd>tabclose<CR>', key_opts)
+map('n', 'th', '<cmd>tabprev<CR>', key_opts)
+map('n', 'tl', '<cmd>tabnext<CR>', key_opts)
+
+-- Telescope navigation
+map('n', '<leader>f', '<cmd>Telescope find_files<CR>', key_opts)
+map('n', '<leader>b', '<cmd>Telescope buffers<CR>', key_opts)
+map('n', '<leader>m', '<cmd>Telescope oldfiles<CR>', key_opts)
+map('n', '<leader>p', '<cmd>Telescope live_grep<CR>', key_opts)
+map('n', '<leader>s', '<cmd>Telescope grep_string<CR>', key_opts)
+map('n', '<leader>t', '<cmd>Telescope treesitter<CR>', key_opts)
+
+-- Ripple REPL integration
+map('n', '<C-Y>', '<Plug>(ripple_send_line)', { silent = true })
+map('i', '<C-Y>', '<C-O><C-Y>', { silent = true })
+map('v', '<C-Y>', '<Plug>(ripple_send_selection)', { silent = true })
+map('n', '<leader>y', 'yrap', { silent = true })
+
+-----------------------------------------------------------
+-- Plugin configurations
+-----------------------------------------------------------
+-- Oil.nvim file explorer
+require('oil').setup({
+  win_options = {
+    winbar = '%!v:lua.get_oil_winbar()'
+  },
+  cleanup_delay_ms = false
+})
+
+-- Treesitter syntax parsing
+require('nvim-treesitter.configs').setup({
+  highlight = { enable = true },
+  playground = { enable = true },
+  incremental_selection = { enable = true }
+})
+
+-- LSP setup
+local lsp = require('lspconfig')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.offsetEncoding = { "utf-16" }
+capabilities.offsetEncoding = { 'utf-16' }
 
-require "lsp_signature".setup {
-  floating_window = false,
-  hint_enable = false,
-}
+local on_attach = function(client, bufnr)
+  local buf_map = function(mode, keys, func, desc)
+    vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = desc })
+  end
 
-current_signature = function()
-  if not pcall(require, 'lsp_signature') then return end
-  local sig = require("lsp_signature").status_line(10000)
-  return sig.hint
+  buf_map('n', 'gD', vim.lsp.buf.declaration, 'Go to declaration')
+  buf_map('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', 'Goto definition')
+  buf_map('n', 'gr', '<cmd>Telescope lsp_references<CR>', 'Show references')
+  buf_map('n', 'K', vim.lsp.buf.hover, 'Hover documentation')
+  buf_map('n', '<space>rn', vim.lsp.buf.rename, 'Rename symbol')
+  buf_map('n', '<space>q', vim.lsp.buf.code_action, 'Code actions')
 end
 
-get_filename = function()
-  return "%<%f "
-end
-
-statusline = function()
-  return get_filename() .. current_signature()
-end
-
-vim.api.nvim_exec([[set statusline=%!v:lua.statusline()]], false)
-
+-- Language servers
 lsp.clangd.setup {
   on_attach = on_attach,
-  cmd = { "clangd", "--background-index", "--clang-tidy" },
+  cmd = { "clangd", "--background-index", "--clang-tidy", "--malloc-trim"},
   capabilities = capabilities,
 }
-
-lsp.gopls.setup {
-    on_attach = on_attach,
-}
-
-lsp.golangci_lint_ls.setup {
-    on_attach = on_attach,
-}
-
 lsp.pylsp.setup {
     on_attach = on_attach,
     filetypes = {'python'},
@@ -254,63 +361,117 @@ lsp.pylsp.setup {
         }
     }
 }
+lsp.gopls.setup({ on_attach = on_attach, capabilities = capabilities })
+lsp.rust_analyzer.setup({ on_attach = on_attach, capabilities = capabilities })
 
-lsp.gopls.setup {
-  on_attach = on_attach
-}
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
 
-lsp.eslint.setup {
-  on_attach = on_attach
-}
-
-lsp.rust_analyzer.setup {
-  on_attach = on_attach
-}
-
-require 'telescope'.setup(
-{
-defaults = {
-  extensions = {
-    fzf = {
-      override_generic_sorter = false, -- override the generic sorter
-      override_file_sorter = true,     -- override the file sorter
-      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+-- Completion (nvim-cmp)
+local cmp = require'cmp'
+cmp.setup({
+    window = {
+      -- completion = cmp.config.window.bordered(),
+      -- documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<Tab>'] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                    cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+                elseif has_words_before() then
+                    cmp.complete()
+                else
+                    fallback()
+                end
+            end, {"i", "s"}),
+      ['<S-Tab>'] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                    cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+                else
+                    fallback()
+                end
+            end, {"i", "s"}),
+        ['<C-e>'] = cmp.mapping.abort()
+    }),
+    sources = cmp.config.sources(
+    {
+      { name = 'nvim_lsp', priority = 8 },
+    }, 
+    {
+      { name = 'path' }
+    },
+    {
+      { name = 'buffer' },
     }
+    ),
+    experimental = {
+        ghost_text = false
+    },
+    completion = { 
+        autocomplete = false
+    },
+    preselect = cmp.PreselectMode.None
   }
-}
-}
 )
-require('telescope').load_extension('fzf')
 
--- Find files using Telescope command-line sugar.
-map('n', '<leader>f', '<cmd>Telescope find_files<cr>', ns)
-map('n', '<leader>b', '<cmd>Telescope buffers<cr>', ns)
-map('n', '<leader>m', '<cmd>Telescope oldfiles<cr>', ns)
-map('n', '<leader>p', '<cmd>Telescope live_grep<cr>', ns)
-map('n', '<leader>s', '<cmd>Telescope grep_string<cr>', ns)
-map('n', '<leader>t', '<cmd>Telescope treesitter<cr>', ns)
-map('i', '<C-E>', 'copilot#Accept("")', {expr=true, silent=true})
-map('n', '<C-Y>', '<Plug>(ripple_send_line)', {silent=true})
-map('i', '<C-Y>', '<C-O><C-Y>', {silent=true})
-map('v', '<C-Y>', '<Plug>(ripple_send_selection)', {silent=true})
-map('n', '<leader>y', 'yrap', {silent=true})
-map('n', 'yrc', '<cmd>:Ripple clear<cr>', {silent=true})
+-- Copilot AI integration
+require('copilot').setup({
+  panel = {
+    enabled = true,
+    auto_refresh = true,
+    keymap = {
+      jump_prev = "[[",
+      jump_next = "]]",
+      accept = "<CR>",
+      refresh = "gr",
+      open = "<C-CR>"
+    },
+    layout = {
+      position = "right", -- | top | left | right
+      ratio = 0.4
+    },
+  },
+  suggestion = {
+    enabled = true,
+    auto_trigger = true,
+    hide_during_completion = true,
+    debounce = 75,
+    keymap = {
+      accept = "<C-E>",
+      accept_word = false,
+      accept_line = false,
+      next = "<C-]>",
+      prev = "<C-[>",
+      dismiss = "<C-.>",
+    },
+  },
+  filetypes = {
+    markdown = true,
+    gitcommit = true,
+    gitrebase = true,
+  },
+  copilot_node_command = 'node', -- Node.js version must be > 18.x
+  server_opts_overrides = {},
+})
 
-map('n', '<c-t>', '<cmd>tabnew<cr>', ns)
-map('n', 'tt', ':tabedit<space>', n)
-map('n', 'tw', '<cmd>tabclose<cr>', ns)
-map('n', 'th', '<cmd>tabprev<cr>', ns)
-map('n', 'tl', '<cmd>tabnext<cr>', ns)
-map('n', '<leader>1', '1gt', ns)
-map('n', '<leader>2', '2gt', ns)
-map('n', '<leader>3', '3gt', ns)
-map('n', '<leader>4', '4gt', ns)
-map('n', '<leader>5', '5gt', ns)
-map('n', '<leader>6', '6gt', ns)
-map('n', '<leader>7', '7gt', ns)
+-----------------------------------------------------------
+-- UI customization
+-----------------------------------------------------------
+cmd 'colorscheme gruvbox'
+cmd 'augroup tmux | au VimEnter * hi! Normal guibg=none | augroup END'
 
--- TODO
--- spellcheck
--- tmux panes
--- specify path in file fuzzy finder
--- toggle hlsearsh
+-- Status line customization
+function _G.get_oil_winbar()
+  local dir = require('oil').get_current_dir()
+  return dir and vim.fn.fnamemodify(dir, ':~') or vim.api.nvim_buf_get_name(0)
+end
+
+function _G.statusline()
+  return '%<%f ' .. require('lsp_signature').status_line(10000).hint
+end
+
+cmd [[set statusline=%!v:lua.statusline()]]
