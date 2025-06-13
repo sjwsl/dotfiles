@@ -26,8 +26,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  -- Package manager
-  { "wbthomason/packer.nvim" }, -- Keep packer for potential rollback
+  -- { "wbthomason/packer.nvim" }, -- Keep packer for potential rollback
 
   -- File navigation
   {
@@ -44,8 +43,6 @@ require("lazy").setup({
     },
     -- cmd = "Telescope",
     config = function()
-      require("telescope").setup()
-      require("telescope").load_extension("fzf")
     end,
   },
 
@@ -78,7 +75,44 @@ require("lazy").setup({
     "zbirenbaum/copilot.lua",
     -- event = "InsertEnter",
     config = function()
-      require("copilot").setup({ suggestion = { auto_trigger = true } })
+      require("copilot").setup({ 
+          panel = {
+            enabled = true,
+            auto_refresh = true,
+            keymap = {
+              jump_prev = "[[",
+              jump_next = "]]",
+              accept = "<CR>",
+              refresh = "gr",
+              open = "<C-CR>"
+            },
+            layout = {
+              position = "right", -- | top | left | right
+              ratio = 0.4
+            },
+          },
+          suggestion = {
+            enabled = true,
+            auto_trigger = true,
+            hide_during_completion = true,
+            debounce = 75,
+            keymap = {
+              accept = "<C-E>",
+              accept_word = false,
+              accept_line = false,
+              next = "<C-]>",
+              prev = "<C-[>",
+              dismiss = "<C-.>",
+            },
+          },
+          filetypes = {
+            markdown = true,
+            gitcommit = true,
+            gitrebase = true,
+          },
+          copilot_node_command = 'node', -- Node.js version must be > 18.x
+          server_opts_overrides = {},
+      })
     end,
   },
   {
@@ -91,11 +125,13 @@ require("lazy").setup({
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
+    -- event = { "BufReadPost", "BufNewFile" },
     config = function()
       require("nvim-treesitter.configs").setup({
+        ensure_installed = { "cpp", "python", "rust", "lua", "go", "toml", "json", "yaml", "csv" },
         highlight = { enable = true },
-        incremental_selection = { enable = false },
+        -- incremental_selection = { enable = false },
+        additional_vim_regex_highlighting = false,
       })
     end,
   },
@@ -111,10 +147,52 @@ require("lazy").setup({
     "mechatroner/rainbow_csv",
     ft = "csv",
   },
+  {
+  "stevearc/conform.nvim",
+  event = { "BufEnter" },
+  cmd = { "ConformInfo" },
+  keys = {
+    {
+      -- Customize or remove this keymap to your liking
+      "<leader>l",
+      function()
+        require("conform").format({ async = true })
+      end,
+      mode = "",
+      desc = "Format buffer",
+    },
+  },
+  -- This will provide type hinting with LuaLS
+  ---@module "conform"
+  ---@type conform.setupOpts
+  opts = {
+    -- Define your formatters
+    formatters_by_ft = {
+      lua = { "stylua" },
+      python = { "black" },
+      cpp = { "clang-format" },
+    },
+    -- Set default options
+    default_format_opts = {
+      lsp_format = "fallback",
+    },
+    -- Set up format-on-save
+    format_on_save = { timeout_ms = 5000 },
+    formatters = {
+      black = {
+        prepend_args = { "--line-length", "120" },
+      },
+    }
+  },
+  init = function()
+    -- If you want the formatexpr, here is the place to set it
+    vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+  end,
+    },
 
   -- Editing enhancements
   {
-    "jiangmiao/auto-pairs",
+    "cohama/lexima.vim"
   },
   {
     "tpope/vim-surround",
@@ -133,9 +211,8 @@ require("lazy").setup({
     keys = { { "ga", mode = { "n", "v" } } },
   },
   {
-    "mhartington/formatter.nvim",
-    cmd = "Format",
-    config = true,
+    "Chiel92/vim-autoformat",
+    cmd = { "AutoFormat" },
   },
 
   -- UI and themes
@@ -159,7 +236,6 @@ require("lazy").setup({
   },
   {
     "urbainvaes/vim-ripple",
-    keys = "<C-Y>",
   },
 }, {
   performance = {
@@ -292,6 +368,13 @@ map('n', '<C-Y>', '<Plug>(ripple_send_line)', { silent = true })
 map('i', '<C-Y>', '<C-O><C-Y>', { silent = true })
 map('v', '<C-Y>', '<Plug>(ripple_send_selection)', { silent = true })
 map('n', '<leader>y', 'yrap', { silent = true })
+map('n', '<leader>1', '1gt', key_opts)
+map('n', '<leader>2', '2gt', key_opts)
+map('n', '<leader>3', '3gt', key_opts)
+map('n', '<leader>4', '4gt', key_opts)
+map('n', '<leader>5', '5gt', key_opts)
+map('n', '<leader>6', '6gt', key_opts)
+map('n', '<leader>7', '7gt', key_opts)
 
 -----------------------------------------------------------
 -- Plugin configurations
@@ -308,7 +391,7 @@ require('oil').setup({
 require('nvim-treesitter.configs').setup({
   highlight = { enable = true },
   playground = { enable = true },
-  incremental_selection = { enable = true }
+  incremental_selection = { enable = false }
 })
 
 -- LSP setup
@@ -317,16 +400,22 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.offsetEncoding = { 'utf-16' }
 
 local on_attach = function(client, bufnr)
-  local buf_map = function(mode, keys, func, desc)
-    vim.keymap.set(mode, keys, func, { buffer = bufnr, desc = desc })
-  end
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-  buf_map('n', 'gD', vim.lsp.buf.declaration, 'Go to declaration')
-  buf_map('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', 'Goto definition')
-  buf_map('n', 'gr', '<cmd>Telescope lsp_references<CR>', 'Show references')
-  buf_map('n', 'K', vim.lsp.buf.hover, 'Hover documentation')
-  buf_map('n', '<space>rn', vim.lsp.buf.rename, 'Rename symbol')
-  buf_map('n', '<space>q', vim.lsp.buf.code_action, 'Code actions')
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
+  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('i', '<c-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 end
 
 -- Language servers
@@ -395,7 +484,7 @@ cmp.setup({
                     fallback()
                 end
             end, {"i", "s"}),
-        ['<C-e>'] = cmp.mapping.abort()
+        -- ['<C-e>'] = cmp.mapping.abort()
     }),
     sources = cmp.config.sources(
     {
@@ -420,42 +509,6 @@ cmp.setup({
 
 -- Copilot AI integration
 require('copilot').setup({
-  panel = {
-    enabled = true,
-    auto_refresh = true,
-    keymap = {
-      jump_prev = "[[",
-      jump_next = "]]",
-      accept = "<CR>",
-      refresh = "gr",
-      open = "<C-CR>"
-    },
-    layout = {
-      position = "right", -- | top | left | right
-      ratio = 0.4
-    },
-  },
-  suggestion = {
-    enabled = true,
-    auto_trigger = true,
-    hide_during_completion = true,
-    debounce = 75,
-    keymap = {
-      accept = "<C-E>",
-      accept_word = false,
-      accept_line = false,
-      next = "<C-]>",
-      prev = "<C-[>",
-      dismiss = "<C-.>",
-    },
-  },
-  filetypes = {
-    markdown = true,
-    gitcommit = true,
-    gitrebase = true,
-  },
-  copilot_node_command = 'node', -- Node.js version must be > 18.x
-  server_opts_overrides = {},
 })
 
 -----------------------------------------------------------
